@@ -1,0 +1,7 @@
+.form label,
+.form Input
+{
+  display: flex;
+  width: 100%;
+}
+
