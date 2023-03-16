@@ -1,3 +1,4 @@
+import { Box, Typography } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
@@ -9,6 +10,7 @@ const columns = [
 ];
 
 const CompanyList = () => {
+  const token = getAuthToken();
   const [company, setCompany] = useState([]);
   const navigate = useNavigate();
 
@@ -20,25 +22,23 @@ const CompanyList = () => {
       .then((json) => setCompany(json));
   }, []);
 
-  const token = getAuthToken();
-
   const doubleClickHandler = (idCompany) => {
     const foundCompany = company.find((c) => c.id == idCompany);
     const { id } = foundCompany;
-    navigate(`${id}`)
+    navigate(`${id}`);
   };
 
   return (
     <>
-      <h1>Lista firm</h1>
-      <div style={{ height: 600, width: "100%" }}>
+      <Typography variant="h4">Lista firm</Typography>
+      <Box sx={{ height: 600, width: "100%" }}>
         <DataGrid
           onRowDoubleClick={({ id }) => doubleClickHandler(id)}
           getRowId={(row) => row.id}
           rows={company}
           columns={columns}
         />
-      </div>
+      </Box>
     </>
   );
 };
