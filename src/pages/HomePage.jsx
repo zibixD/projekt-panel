@@ -1,5 +1,8 @@
+import CompanyList from "../components/CompanyList";
+
 const HomePage = () => {
-    return <h1>działa</h1>
+
+    return <CompanyList/>
 }
 
 export default HomePage;

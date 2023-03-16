@@ -1,20 +1,23 @@
-import { Form, useNavigation } from "react-router-dom"
-import { Input, Button } from "@mui/material"; 
+import { Form  } from "react-router-dom"
+import { Input } from "@mui/material"; 
 
 import classes from './LoginForm.module.css'
+import { useState } from "react";
+
 
 const LoginForm = () => {
-    const navigation = useNavigation()
 
-    const isSubmitting = navigation.state === 'submitting'
+    const [filledE, setFilledE] = useState()
+    const [filledP, setFilledP] = useState()
 
+    
     return (
-        <Form method="post" className={classes.form}>
+        <Form  action="/" method="post" className={classes.form}>
             <label htmlFor="email">Email</label>
-            <Input id="email" type="email" required></Input>
+            <Input name="email" id="email" type="email" required onChange={event => setFilledE(event.target.value)}/>
             <label htmlFor="password">Hasło</label>
-            <Input id="password" type="password" required></Input>
-            <button disabled={isSubmitting} >{isSubmitting ? 'Submitting...' : 'Zaloguj'}</button>
+            <Input name="password" id="password" type="password" required onChange={event => setFilledP(event.target.value)}/>
+            <button type="submit" disabled={!filledE || !filledP}>Zaloguj</button>
         </Form>
     )
 }

@@ -3,23 +3,34 @@ import { json, redirect } from 'react-router-dom';
 import LoginForm from "../components/LoginForm";
 
 const LoginPage = () => {
-    return <LoginForm></LoginForm>
+
+    return <LoginForm/>
 }
 
 export default LoginPage;
 
 export async function action({ request }){
+    
+    // const [enabled, setEnabled] = useState(true);
+    
 
-    debugger
+    const formData = await request.formData();
+    const username = formData.get("email");
+    const password = formData.get("password");
+
+    if(username !== "admin@polskagrupa.it" || password !== "admin"){
+        alert('Niepoprawny email lub hasło')
+        return null
+    }
 
     const response = await fetch('https://dev.pgitdev.pl/auth/v2/user/login', {
         method: 'post',
         headers: {"Content-Type": "application/json",},
-        body: JSON.stringify({
-            username: 'admin@polskagrupa.it',
-            password: "admin",
-        })
+        body: JSON.stringify({username, password})
+        // {...recivedData}
     })
+    await new Promise (resolve => setTimeout (resolve, 3000));
+
     if(response.status === 422 || response.status === 401) {
         return response
     }
@@ -29,7 +40,7 @@ export async function action({ request }){
     }
 
     const resData = await response.json();
-    const token = resData.token;
+    const token = resData.access_token;
 
     localStorage.setItem('token', token);
     
@@ -40,3 +51,4 @@ export async function action({ request }){
     return redirect('firmy');
 
 };
+
