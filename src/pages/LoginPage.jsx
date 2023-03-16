@@ -29,7 +29,7 @@ export async function action({ request }){
         body: JSON.stringify({username, password})
         // {...recivedData}
     })
-    await new Promise (resolve => setTimeout (resolve, 3000));
+    // await new Promise (resolve => setTimeout (resolve, 3000));
 
     if(response.status === 422 || response.status === 401) {
         return response

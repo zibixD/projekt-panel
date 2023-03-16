@@ -1,5 +1,7 @@
-const CompanyDetailPage = () => {
-    return <h1>Company details</h1>
+import CompanyDetail from "../components/CompanyDetail";
+
+const CompanyDetailPage = (props) => {
+    return <CompanyDetail/>
 }
 
 export default CompanyDetailPage;

@@ -1,21 +1,10 @@
 import { DataGrid } from "@mui/x-data-grid";
-import { useState, useCallback, useEffect } from "react";
-import {
-  json,
-  redirect,
-  useNavigate,
-  useParams,
-  useRouteLoaderData,
-} from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { getAuthToken } from "../util/auth";
-import { Link } from "react-router-dom";
-// import { Params } from 'react-router-dom';
 
 const columns = [
-  // { field: 'id', headerName: 'id'},
-  { field: "name", headerName: "name", width: 150 },
-  // renderCell: (params) => (
-  // <Link to={`${params.value}`}>{params.value}</Link>)},
+  { field: "name", headerName: "Nazwa firmy", width: 150 },
   { field: "nip", headerName: "NIP", width: 150 },
 ];
 
@@ -33,9 +22,10 @@ const CompanyList = () => {
 
   const token = getAuthToken();
 
-  const doubleClickHandler = (id) => {
-    const foundCompany = company.find((c) => c.id == id);
-    // navigate(`${companyData.name}`)
+  const doubleClickHandler = (idCompany) => {
+    const foundCompany = company.find((c) => c.id == idCompany);
+    const { id } = foundCompany;
+    navigate(`${id}`)
   };
 
   return (
