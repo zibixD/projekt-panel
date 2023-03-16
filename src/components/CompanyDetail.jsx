@@ -1,18 +1,28 @@
 import { Card, Typography } from "@mui/material";
-import { Box } from "@mui/system";
 import { Tabs, Tab } from "@mui/material";
 import { TabPanel, TabContext } from "@mui/lab";
-
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getAuthToken } from "../util/auth";
+import { DataGrid } from "@mui/x-data-grid";
+import { Box } from "@mui/system";
+
+const columns = [
+    { field: "id", headerName: "Identyfikator", width: 150 },
+    { field: "admin", headerName: "Admin", width: 150 },
+    { field: "name", headerName: "Imię", width: 150 },
+    { field: "email", headerName: "Email", width: 150 },
+]
 
 const CompanyDetail = () => {
   const token = getAuthToken();
   const [details, setDetails] = useState(null);
   const [value, setValue] = useState(0);
+  const [member, setMember ] = useState([]);
   const params = useParams();
 
+  // fetch danych
+  
   useEffect(() => {
     fetch(`https://dev.pgitdev.pl/admin/companies/${params.id}`, {
       headers: { Authorization: `Bearer ${token}` },
@@ -21,12 +31,21 @@ const CompanyDetail = () => {
       .then((json) => setDetails(json));
   }, []);
 
+    // fetch pracowników
+
+    useEffect(() => {
+        fetch(`https://dev.pgitdev.pl/admin/companies/${params.id}/users`, {
+            headers: { Authorization: `Bearer ${token}`},
+        })
+        .then((response) => response.json())
+        .then((json) => setMember(json))
+
+    }, [])
+
   const changeHandler = (event, newValue) => {
     setValue(newValue);
   };
-
-  console.log(value);
-
+  
   return (
     <>
       {details && (
@@ -71,7 +90,9 @@ const CompanyDetail = () => {
                 </Typography>
               </TabPanel>
               <TabPanel value={1}>
-                <Typography variant="h1">Elo</Typography>
+                <Box style={{ height: 500}}>
+                <DataGrid rows={member} columns={columns}   />
+                </Box>
               </TabPanel>
             </Card>
           </TabContext>
