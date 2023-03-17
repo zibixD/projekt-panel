@@ -17,8 +17,9 @@ const LoginForm = () => {
       <Typography variant="h4" sx={{
         backgroundColor: 'primary.light',
         color: 'white',
-        height: 70,
-        width: '100%',
+
+        height: {sx: 10, sm:70 },
+        width: {sx: "50%", sm: "100%"},
         padding: 4
         
       }}>Panel logowania</Typography>
@@ -28,16 +29,16 @@ const LoginForm = () => {
       flexDirection: 'column',
       alignItems: "center",
       boxShadow: 4,
-      width: 700,
-      height: 400,
-      marginLeft: '30%',
+      width: {sx: "100%", sm:700},
+      height: {sx: "100%", sm:400},
+      marginLeft: {sx: 100, sm: '30%'},
     }}>
       <Form action="/" method="post">
       <Box >
         <TextField
           sx={{ 
           mb: 5, mt: 10,
-          width: 500,
+          width: {sx:"100%", sm: 500}
             
         }}
           name="email"
@@ -53,7 +54,7 @@ const LoginForm = () => {
         <TextField
           sx={{ 
           mb: 5,
-          width: 500,        
+          width: {sx:"100%", sm: 500}       
         }}
           name="password"
           id="password"
@@ -65,8 +66,12 @@ const LoginForm = () => {
       </Box>
       <Button
         sx={{
-          width: 500,
           height: 50,
+          width: {sx:"100%", sm: 500},
+          display: 'flex',
+          
+
+
         }}
         type="submit"
         disabled={!filledE || !filledP || isSubmitting} >

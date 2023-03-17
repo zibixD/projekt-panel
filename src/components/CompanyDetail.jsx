@@ -1,4 +1,4 @@
-import { Card, Typography } from "@mui/material";
+import { Card, Typography, Button } from "@mui/material";
 import { Tabs, Tab } from "@mui/material";
 import { TabPanel, TabContext } from "@mui/lab";
 import { useEffect, useState } from "react";
@@ -6,6 +6,7 @@ import { useParams } from "react-router-dom";
 import { getAuthToken } from "../util/auth";
 import { DataGrid } from "@mui/x-data-grid";
 import { Box } from "@mui/system";
+import { useLogout } from "../hooks/useLogout";
 
 const columns = [
     { field: "id", headerName: "Identyfikator", width: 150 },
@@ -20,6 +21,7 @@ const CompanyDetail = () => {
   const [value, setValue] = useState(0);
   const [member, setMember ] = useState([]);
   const params = useParams();
+  const logout = useLogout();
 
   // fetch danych
   
@@ -50,14 +52,30 @@ const CompanyDetail = () => {
     <>
       {details && (
         <>
+        <Card sx={{
+          display: 'flex',
+           backgroundColor: 'primary.light',
+           color: 'white',
+        }}>
           <Typography variant="h4" sx={{
-        backgroundColor: 'primary.light',
-        color: 'white',
-        height: 70,
-        width: '100%',
-        padding: 4 }}>
+            height: 70,
+            width: '100%',
+            padding: 4 
+          }}>
             Szczegóły firmy - {details?.name ? details.name : "Nie podano"}
           </Typography>
+          <Button
+          onClick={logout}
+          sx={{
+            color: "white",
+            width: 250,
+            paddingRight: 2,
+            fontSize: 20,
+          }}
+          >
+            Wyloguj
+          </Button>
+        </Card>
           <Tabs
             value={value}
             onChange={changeHandler}
