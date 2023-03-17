@@ -7,8 +7,8 @@ import { useLogout } from "../hooks/useLogout";
 import { getAuthToken } from "../util/auth";
 
 const columns = [
-  { field: "name", headerName: "Nazwa firmy", width: 200 },
-  { field: "nip", headerName: "NIP", width: 200 },
+  { field: "name", headerName: "Nazwa firmy", width: 150 },
+  { field: "nip", headerName: "NIP", width: 150 },
 ];
 
 const CompanyList = () => {
@@ -31,10 +31,6 @@ const CompanyList = () => {
     const { id } = foundCompany;
     navigate(`${id}`);
   };
-
-  // const logoutHandler = () => {
-
-  // }
 
   return (
     <>

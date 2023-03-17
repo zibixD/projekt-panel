@@ -2,7 +2,7 @@ import { Card, Typography, Button } from "@mui/material";
 import { Tabs, Tab } from "@mui/material";
 import { TabPanel, TabContext } from "@mui/lab";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { getAuthToken } from "../util/auth";
 import { DataGrid } from "@mui/x-data-grid";
 import { Box } from "@mui/system";
@@ -22,6 +22,7 @@ const CompanyDetail = () => {
   const [member, setMember ] = useState([]);
   const params = useParams();
   const logout = useLogout();
+  const navigate = useNavigate()
 
   // fetch danych
   
@@ -48,6 +49,10 @@ const CompanyDetail = () => {
     setValue(newValue);
   };
   
+  const backHandler = () => {
+    navigate(-1)
+  }
+
   return (
     <>
       {details && (
@@ -62,7 +67,7 @@ const CompanyDetail = () => {
             width: '100%',
             padding: 4 
           }}>
-            Szczegóły firmy - {details?.name ? details.name : "Nie podano"}
+          {details?.name ? details.name : "Nie podano"}
           </Typography>
           <Button
           onClick={logout}
@@ -124,6 +129,10 @@ const CompanyDetail = () => {
           </TabContext>
         </>
       )}
+      <Button sx={{
+        display: 'flex',
+
+      }} onClick={backHandler}>Cofnij</Button>
     </>
   );
 };
