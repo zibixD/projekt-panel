@@ -2,6 +2,7 @@ import { Box, Card, Typography, Button } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import { useState, useEffect } from "react";
 import { Form, useNavigate } from "react-router-dom";
+import { useIsMobile } from "../hooks/useIsMobile";
 import { useLogout } from "../hooks/useLogout";
 import { getAuthToken } from "../util/auth";
 
@@ -15,6 +16,7 @@ const CompanyList = () => {
   const [company, setCompany] = useState([]);
   const navigate = useNavigate();
   const logout = useLogout();
+  const isMobile = useIsMobile();
 
   useEffect(() => {
     fetch("https://dev.pgitdev.pl/admin/companies", {
@@ -77,6 +79,9 @@ const CompanyList = () => {
           sx={{
             padding: 1,
           }}
+          onRowClick={
+            isMobile ? ({ row }) => doubleClickHandler(row.id) : undefined
+          }
           onRowDoubleClick={({ id }) => doubleClickHandler(id)}
           getRowId={(row) => row.id}
           rows={company}
