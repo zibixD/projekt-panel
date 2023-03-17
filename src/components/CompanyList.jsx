@@ -1,12 +1,12 @@
-import { Box, Typography } from "@mui/material";
+import { Box, Card, Typography, Button } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { Form, useNavigate } from "react-router-dom";
 import { getAuthToken } from "../util/auth";
 
 const columns = [
-  { field: "name", headerName: "Nazwa firmy", width: 150 },
-  { field: "nip", headerName: "NIP", width: 150 },
+  { field: "name", headerName: "Nazwa firmy", width: 200 },
+  { field: "nip", headerName: "NIP", width: 200},
 ];
 
 const CompanyList = () => {
@@ -28,11 +28,40 @@ const CompanyList = () => {
     navigate(`${id}`);
   };
 
+  // const logoutHandler = () => {
+
+  // }
+
   return (
     <>
-      <Typography variant="h4">Lista firm</Typography>
-      <Box sx={{ height: 600, width: "100%" }}>
-        <DataGrid
+    <Card sx={{
+      backgroundColor: 'primary.light',
+      display: 'flex',
+      }}>
+      <Typography variant="h4" sx={{
+        backgroundColor: 'primary.light',
+        color: 'white',
+        height: 70,
+        width: '100%',
+        padding: 4
+        }}>Lista firm</Typography>
+        <Form action="logout">
+          <Button sx={{
+            color: "white",
+            width: 250,
+            paddingRight: 2,
+            fontSize: 20
+          }} > Wyloguj</Button>
+        </Form>
+    </Card>
+      <Box sx={{ 
+        height: 600,
+        width: "100%",
+        boxShadow: 5,
+        }}>
+        <DataGrid sx={{
+          padding: 1
+        }}
           onRowDoubleClick={({ id }) => doubleClickHandler(id)}
           getRowId={(row) => row.id}
           rows={company}

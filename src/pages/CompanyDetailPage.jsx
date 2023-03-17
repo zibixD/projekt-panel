@@ -1,6 +1,7 @@
 import CompanyDetail from "../components/CompanyDetail";
 
 const CompanyDetailPage = (props) => {
+
     return <CompanyDetail/>
 }
 

@@ -27,9 +27,9 @@ export async function action({ request }){
         method: 'post',
         headers: {"Content-Type": "application/json",},
         body: JSON.stringify({username, password})
-        // {...recivedData}
     })
-    // await new Promise (resolve => setTimeout (resolve, 3000));
+    
+    await new Promise (resolve => setTimeout (resolve, 1000));
 
     if(response.status === 422 || response.status === 401) {
         return response

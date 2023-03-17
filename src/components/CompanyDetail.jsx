@@ -50,7 +50,12 @@ const CompanyDetail = () => {
     <>
       {details && (
         <>
-          <Typography sx={{ fontSize: 40 }}>
+          <Typography variant="h4" sx={{
+        backgroundColor: 'primary.light',
+        color: 'white',
+        height: 70,
+        width: '100%',
+        padding: 4 }}>
             Szczegóły firmy - {details?.name ? details.name : "Nie podano"}
           </Typography>
           <Tabs
@@ -62,7 +67,10 @@ const CompanyDetail = () => {
             <Tab label="Pracownicy" />
           </Tabs>
           <TabContext value={value}>
-            <Card sx={{ padding: 5 }}>
+            <Card sx={{ 
+              padding: 5,
+              boxShadow: 5,
+              }}>
               <TabPanel value={0}>
                 <Typography variant="h5">
                   Nazwa firmy: {details?.name ? details.name : "Brak"}
