@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import CompanyList from "../components/CompanyList";
 import { useIsAuthenticated } from "../hooks/useIsAuthenticated";
 
-const HomePage = (props) => {
+const HomePage = () => {
   const isAuth = useIsAuthenticated();
   const navigate = useNavigate();
 
