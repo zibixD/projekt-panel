@@ -68,7 +68,7 @@ const LoginForm = () => {
         sx={{
           height: 50,
           width: {sx:"100%", sm: 500},
-          display: 'flex',
+          
           
 
 

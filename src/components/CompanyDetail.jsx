@@ -131,7 +131,7 @@ const CompanyDetail = () => {
       )}
       <Button sx={{
         display: 'flex',
-
+        
       }} onClick={backHandler}>Cofnij</Button>
     </>
   );

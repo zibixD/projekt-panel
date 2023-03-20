@@ -4,6 +4,10 @@ import HomePage from "./pages/HomePage";
 import CompanyDetailPage from "./pages/CompanyDetailPage";
 import ErrorPage from "./pages/ErrorPage";
 import { checkAuthLoader, tokenLoader } from "./util/auth";
+import  store  from './store/storeMain';
+import { PersistGate } from "redux-persist/integration/react";
+import persistStore from "redux-persist/es/persistStore";
+
 
 const router = createBrowserRouter([
   {
@@ -21,8 +25,16 @@ const router = createBrowserRouter([
   },
 ]);
 
+let persistor = persistStore(store)
+
 function App() {
-  return <RouterProvider router={router} />;
+  return (
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
+        <RouterProvider router={router} />
+      </PersistGate>
+    </Provider>
+    )
 }
 
 export default App;
