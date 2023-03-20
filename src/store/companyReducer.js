@@ -4,7 +4,9 @@ const initialCompanyState = {
   companies: [],
   isLoadingCompanies: true,
   details: null,
+  isLoadingDetails: true,
   users: [],
+  isLoadingUsers: true,
 };
 
 const companySlice = createSlice({
@@ -14,6 +16,8 @@ const companySlice = createSlice({
     getCompanies(state){
       state.companies = [];
       state.isLoadingCompanies = true;
+      state.isLoadingDetails = true;
+      state.isLoadingUsers = true;
     },
     setCompanies(state, action) {
       state.companies = action.payload;
@@ -21,9 +25,11 @@ const companySlice = createSlice({
     },
     setDetails(state, action) {
       state.details = action.payload;
+      state.isLoadingDetails = false;
     },
     setUsers(state, action) {
       state.users = action.payload;
+      state.isLoadingUsers = false;
     }
   },
 });

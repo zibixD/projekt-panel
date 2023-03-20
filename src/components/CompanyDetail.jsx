@@ -8,7 +8,6 @@ import { Box } from "@mui/system";
 import { useLogout } from "../hooks/useLogout";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCompanyUsers, fetchCompanyData } from "../store/panel-actions";
-import LoadingEffect from "../UI/LoadingCircle";
 
 const columns = [
   { field: "id", headerName: "Identyfikator", width: 150 },
@@ -19,7 +18,7 @@ const columns = [
 
 const CompanyDetail = () => {
   const details = useSelector((state) => state.company.details)
-  const isLoadingCompanies = useSelector((state) => state.company.isLoadingCompanies)
+  const isLoadingDetails = useSelector((state) => state.company.isLoadingDetails)
   const [value, setValue] = useState(0);
   const member = useSelector((state) => state.company.users);
   const params = useParams();
@@ -42,9 +41,15 @@ const CompanyDetail = () => {
 
   return (
     <>
-      {isLoadingCompanies
+      {isLoadingDetails
       ? 
-      <CircularProgress/>
+      <Box sx={{
+        display: "flex",
+        placeContent: "center",
+        alignItems: "center"
+      }}>
+        <CircularProgress/>
+      </Box>
       :
       ( 
       <>
