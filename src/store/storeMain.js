@@ -3,9 +3,11 @@ import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage"; // defaults to localStorage for web
 import authReducer from "./authReducer";
 import thunk from "redux-thunk";
+import companyReducer from "./companyReducer";
 
 const reducers = combineReducers({
   auth: authReducer,
+  company: companyReducer,
 });
 
 const persistConfig = {

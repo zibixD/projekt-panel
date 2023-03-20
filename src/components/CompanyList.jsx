@@ -1,9 +1,11 @@
 import { Box, Card, Typography, Button } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Form, useNavigate } from "react-router-dom";
 import { useIsMobile } from "../hooks/useIsMobile";
 import { useLogout } from "../hooks/useLogout";
+import { getCompanies } from "../store/panel-actions";
 
 const columns = [
   { field: "name", headerName: "Nazwa firmy", width: 150 },
@@ -11,21 +13,18 @@ const columns = [
 ];
 
 const CompanyList = () => {
-  const [company, setCompany] = useState([]);
+  const companies = useSelector((state) => state.company.companies);
   const navigate = useNavigate();
   const logout = useLogout();
   const isMobile = useIsMobile();
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    fetch("https://dev.pgitdev.pl/admin/companies", {
-      headers: { Authorization: `Bearer ` },
-    })
-      .then((response) => response.json())
-      .then((json) => setCompany(json));
+    dispatch(getCompanies());
   }, []);
 
   const doubleClickHandler = (idCompany) => {
-    const foundCompany = company.find((c) => c.id == idCompany);
+    const foundCompany = comapnies.find((c) => c.id == idCompany);
     const { id } = foundCompany;
     navigate(`${id}`);
   };
@@ -78,7 +77,7 @@ const CompanyList = () => {
           }
           onRowDoubleClick={({ id }) => doubleClickHandler(id)}
           getRowId={(row) => row.id}
-          rows={company}
+          rows={companies}
           columns={columns}
         />
       </Box>
