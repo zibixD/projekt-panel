@@ -4,7 +4,6 @@ import { useState, useEffect } from "react";
 import { Form, useNavigate } from "react-router-dom";
 import { useIsMobile } from "../hooks/useIsMobile";
 import { useLogout } from "../hooks/useLogout";
-import { getAuthToken } from "../util/auth";
 
 const columns = [
   { field: "name", headerName: "Nazwa firmy", width: 150 },
@@ -12,7 +11,6 @@ const columns = [
 ];
 
 const CompanyList = () => {
-  const token = getAuthToken();
   const [company, setCompany] = useState([]);
   const navigate = useNavigate();
   const logout = useLogout();
@@ -20,7 +18,7 @@ const CompanyList = () => {
 
   useEffect(() => {
     fetch("https://dev.pgitdev.pl/admin/companies", {
-      headers: { Authorization: `Bearer ${token}` },
+      headers: { Authorization: `Bearer ` },
     })
       .then((response) => response.json())
       .then((json) => setCompany(json));
