@@ -1,4 +1,4 @@
-import { Card, Typography, Button } from "@mui/material";
+import { Card, Typography, Button, CircularProgress } from "@mui/material";
 import { Tabs, Tab } from "@mui/material";
 import { TabPanel, TabContext } from "@mui/lab";
 import { useEffect, useState } from "react";
@@ -6,6 +6,9 @@ import { useNavigate, useParams } from "react-router-dom";
 import { DataGrid } from "@mui/x-data-grid";
 import { Box } from "@mui/system";
 import { useLogout } from "../hooks/useLogout";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchCompanyUsers, fetchCompanyData } from "../store/panel-actions";
+import LoadingEffect from "../UI/LoadingCircle";
 
 const columns = [
   { field: "id", headerName: "Identyfikator", width: 150 },
@@ -15,33 +18,19 @@ const columns = [
 ];
 
 const CompanyDetail = () => {
-  const token = getAuthToken();
-  const [details, setDetails] = useState(null);
+  const details = useSelector((state) => state.company.details)
+  const isLoadingCompanies = useSelector((state) => state.company.isLoadingCompanies)
   const [value, setValue] = useState(0);
-  const [member, setMember] = useState([]);
+  const member = useSelector((state) => state.company.users);
   const params = useParams();
   const logout = useLogout();
   const navigate = useNavigate();
-
-  // fetch danych
-
-  useEffect(() => {
-    fetch(`https://dev.pgitdev.pl/admin/companies/${params.id}`, {
-      headers: { Authorization: `Bearer ` },
-    })
-      .then((response) => response.json())
-      .then((json) => setDetails(json));
-  }, []);
-
-  // fetch pracowników
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    fetch(`https://dev.pgitdev.pl/admin/companies/${params.id}/users`, {
-      headers: { Authorization: `Bearer ` },
-    })
-      .then((response) => response.json())
-      .then((json) => setMember(json));
-  }, []);
+    dispatch(fetchCompanyData(params.id))
+    dispatch(fetchCompanyUsers(params.id))
+  }, [params]);
 
   const changeHandler = (event, newValue) => {
     setValue(newValue);
@@ -53,6 +42,12 @@ const CompanyDetail = () => {
 
   return (
     <>
+      {isLoadingCompanies
+      ? 
+      <CircularProgress/>
+      :
+      ( 
+      <>
       {details && (
         <>
           <Card
@@ -142,6 +137,7 @@ const CompanyDetail = () => {
       >
         Cofnij
       </Button>
+      </> )}
     </>
   );
 };

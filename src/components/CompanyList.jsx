@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Form, useNavigate } from "react-router-dom";
 import { useIsMobile } from "../hooks/useIsMobile";
 import { useLogout } from "../hooks/useLogout";
-import { getCompanies } from "../store/panel-actions";
+import { getCompaniesList } from "../store/panel-actions";
 
 const columns = [
   { field: "name", headerName: "Nazwa firmy", width: 150 },
@@ -20,11 +20,11 @@ const CompanyList = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getCompanies());
+    dispatch(getCompaniesList());
   }, []);
 
   const doubleClickHandler = (idCompany) => {
-    const foundCompany = comapnies.find((c) => c.id == idCompany);
+    const foundCompany = companies.find((c) => c.id == idCompany);
     const { id } = foundCompany;
     navigate(`${id}`);
   };

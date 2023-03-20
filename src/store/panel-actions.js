@@ -1,19 +1,21 @@
 import { companyService } from "../services/companyService";
-import { get } from "./companyReducer";
+import { getCompanies, setCompanies, setDetails, setUsers } from "./companyReducer";
 
-export const getCompanies = () => async (dispatch) => {
+export const getCompaniesList = () => async (dispatch) => {
+  await dispatch(getCompanies())
   const data = await companyService.getCompanies();
 
-  await dispatch(get(data));
+  await dispatch(setCompanies(data));
 };
 
-export const fetchCompnayData = () => {
-  return async (dispatch) => {
-    const fetchData = async () => {
-      const response = await fetch("https://dev.pgitdev.pl/admin/companies", {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-      const CompanyData = await response.json();
-    };
-  };
+export const fetchCompanyData = (id) => async (dispatch) => {
+  const data = await companyService.getDetails(id);
+
+  await dispatch(setDetails(data))
 };
+
+export const fetchCompanyUsers = (id) => async (dispatch) => {
+  const data = await companyService.getUser(id);
+
+  await dispatch(setUsers(data))
+} 
