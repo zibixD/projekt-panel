@@ -43,9 +43,9 @@ const CompanyList = () => {
           sx={{
             backgroundColor: "primary.light",
             color: "white",
-            height: 70,
+            height: 50,
             width: "100%",
-            padding: 4,
+            padding: 6,
           }}
         >
           Lista firm

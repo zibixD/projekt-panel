@@ -8,6 +8,7 @@ import { Box } from "@mui/system";
 import { useLogout } from "../hooks/useLogout";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCompanyUsers, fetchCompanyData } from "../store/panel-actions";
+import HomeIcon from "../UI/HomeIcon";
 
 const columns = [
   { field: "id", headerName: "Identyfikator", width: 150 },
@@ -62,12 +63,19 @@ const CompanyDetail = () => {
               color: "white",
             }}
           >
+            <Box onClick={backHandler} sx={{
+              paddingLeft: 4
+            }}>
+            <HomeIcon />
+            </Box>
+
+            
             <Typography
               variant="h4"
               sx={{
-                height: 70,
+                height: 50,
                 width: "100%",
-                padding: 4,
+                padding: 6,
               }}
             >
               {details?.name ? details.name : "Nie podano"}
@@ -134,14 +142,14 @@ const CompanyDetail = () => {
           </TabContext>
         </>
       )}
-      <Button
+      {/* <Button
         sx={{
           display: "flex",
         }}
         onClick={backHandler}
       >
         Cofnij
-      </Button>
+      </Button> */}
       </> )}
     </>
   );

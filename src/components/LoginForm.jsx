@@ -18,20 +18,22 @@ const LoginForm = () => {
         backgroundColor: 'primary.light',
         color: 'white',
 
-        height: {sx: 10, sm:70 },
-        width: {sx: "50%", sm: "100%"},
-        padding: 4
+        height: {sx: 10, sm:50 },
+        width: {sx: "50%", sm: "100%", md: "100%"},
+        padding: 6,
         
       }}>Panel logowania</Typography>
     
     <Box sx={{
       display: 'flex',
+      flexWrap: 'wrap' ,
       flexDirection: 'column',
       alignItems: "center",
       boxShadow: 4,
-      width: {sx: "100%", sm:700},
+      width: {sx: "100%", sm:600, md: 700},
       height: {sx: "100%", sm:400},
-      marginLeft: {sx: 100, sm: '30%'},
+      marginX : {sx: "0%", sm: '10%', md: '15%', lg: '30%'},
+      // marginRight: {sx: 100, sm: '10%', md: '20%', lg: '30%'},
     }}>
       <Form action="/" method="post">
       <Box >
