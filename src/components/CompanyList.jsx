@@ -61,7 +61,7 @@ const CompanyList = () => {
         >
           Wyloguj
         </Button>
-        <DebugButton />
+        {/* <DebugButton /> */}
       </Card>
       <Box
         sx={{
