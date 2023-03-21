@@ -1,15 +1,20 @@
 import { Button } from "@mui/material";
+import apiService from "../services/apiService";
 
-const debugButton = () =>{
+const DebugButton = () => {
+  const handler = async () => {
+    await apiService.get("/admin/companies", {
+      headers: {
+        Authorization: "Bearer test",
+      },
+    });
+  };
 
-    const response = fetch("https://dev.pgitdev.pl/auth/v2/user/login", {
-        headers: { "Authorization": "Bearer awadad" }
-    
-        
-    }
-    ) 
+  return (
+    <Button variant="text" onClick={handler}>
+      refreshuj token
+    </Button>
+  );
+};
 
-    return <Button variant="text">Text</Button>
-}
-
-export default debugButton;
+export default DebugButton;
