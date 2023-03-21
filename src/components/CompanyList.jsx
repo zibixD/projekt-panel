@@ -1,8 +1,8 @@
 import { Box, Card, Typography, Button } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Form, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useIsMobile } from "../hooks/useIsMobile";
 import { useLogout } from "../hooks/useLogout";
 import { getCompaniesList } from "../store/panel-actions";

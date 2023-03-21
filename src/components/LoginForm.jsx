@@ -68,15 +68,12 @@ const LoginForm = () => {
         sx={{
           height: 50,
           width: {sx:"100%", sm: 500},
-          
-          
-
-
         }}
         type="submit"
         disabled={!filledE || !filledP || isSubmitting} >
         {isSubmitting ? 'zatwierdzanie' : 'zaloguj' }
       </Button>
+
     </Form>
     </Box>
     </>

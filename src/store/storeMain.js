@@ -21,6 +21,7 @@ export const store = configureStore({
   reducer: persistedReducer,
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({ serializableCheck: false }).prepend(thunk),
+  devTools: true,
 });
 
 export const persistor = persistStore(store);

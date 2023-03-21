@@ -30,7 +30,7 @@ const companySlice = createSlice({
     setUsers(state, action) {
       state.users = action.payload;
       state.isLoadingUsers = false;
-    }
+    },
   },
 });
 

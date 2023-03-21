@@ -38,11 +38,12 @@ export async function action({ request }) {
 
   const resData = await response.json();
   const token = resData.access_token;
+  const refreshToken = resData.refresh_token;
 
   const expiration = new Date();
   expiration.setHours(expiration.getHours() + 2);
 
-  await dispatch(login({ token: token, expiration: expiration.toISOString() }));
+  await dispatch(login({ token: token, refreshToken: refreshToken, expiration: expiration.toISOString() }));
 
   return redirect("firmy");
 }
