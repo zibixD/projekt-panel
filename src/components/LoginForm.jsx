@@ -12,18 +12,20 @@ const LoginForm = () => {
   const isSubmitting = navigation.state === "submitting";
 
   return (
-    <Box>
-      <Typography
-        variant="h4"
-        sx={{
-          backgroundColor: "primary.light",
-          color: "white",
-          height: { sx: 10, sm: 50 },
-          padding: 6,
-        }}
-      >
-        Panel logowania
-      </Typography>
+    <Box
+      sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}
+    >
+      <Box sx={{ width: "100%", backgroundColor: "primary.light" }}>
+        <Typography
+          variant="h4"
+          sx={{
+            p: 4,
+            color: "white",
+          }}
+        >
+          Panel logowania
+        </Typography>
+      </Box>
       <Box
         sx={{
           display: "flex",
@@ -33,7 +35,7 @@ const LoginForm = () => {
           boxShadow: 4,
           width: { sx: "100%", sm: 600, md: 700 },
           height: { sx: "100%", sm: 400 },
-          marginX: { sx: "0%", sm: "10%", md: "15%", lg: "30%" },
+          // marginX: { sx: "0%", sm: "10%", md: "15%", lg: "30%" },
           // marginRight: {sx: 100, sm: '10%', md: '20%', lg: '30%'},
         }}
       >
