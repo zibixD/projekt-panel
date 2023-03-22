@@ -1,10 +1,12 @@
 import { Box, Card, Typography, Button } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
-import { useState, useEffect } from "react";
-import { Form, useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { useIsMobile } from "../hooks/useIsMobile";
 import { useLogout } from "../hooks/useLogout";
-import { getAuthToken } from "../util/auth";
+import { getCompaniesList } from "../store/panel-actions";
+// import DebugButton from "./DebugButton";
 
 const columns = [
   { field: "name", headerName: "Nazwa firmy", width: 150 },
@@ -12,22 +14,18 @@ const columns = [
 ];
 
 const CompanyList = () => {
-  const token = getAuthToken();
-  const [company, setCompany] = useState([]);
+  const companies = useSelector((state) => state.company.companies);
   const navigate = useNavigate();
   const logout = useLogout();
   const isMobile = useIsMobile();
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    fetch("https://dev.pgitdev.pl/admin/companies", {
-      headers: { Authorization: `Bearer ${token}` },
-    })
-      .then((response) => response.json())
-      .then((json) => setCompany(json));
+    dispatch(getCompaniesList());
   }, []);
 
   const doubleClickHandler = (idCompany) => {
-    const foundCompany = company.find((c) => c.id == idCompany);
+    const foundCompany = companies.find((c) => c.id == idCompany);
     const { id } = foundCompany;
     navigate(`${id}`);
   };
@@ -45,9 +43,9 @@ const CompanyList = () => {
           sx={{
             backgroundColor: "primary.light",
             color: "white",
-            height: 70,
+            height: 50,
             width: "100%",
-            padding: 4,
+            padding: 6,
           }}
         >
           Lista firm
@@ -63,6 +61,7 @@ const CompanyList = () => {
         >
           Wyloguj
         </Button>
+        {/* <DebugButton /> */}
       </Card>
       <Box
         sx={{
@@ -80,7 +79,7 @@ const CompanyList = () => {
           }
           onRowDoubleClick={({ id }) => doubleClickHandler(id)}
           getRowId={(row) => row.id}
-          rows={company}
+          rows={companies}
           columns={columns}
         />
       </Box>

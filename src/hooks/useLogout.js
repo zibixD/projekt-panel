@@ -1,11 +1,12 @@
 import { useNavigate } from "react-router-dom";
+import { logout } from "../store/authReducer";
+import { dispatch } from "../store/storeMain";
 
 export const useLogout = () => {
   const navigate = useNavigate();
 
   return () => {
-    localStorage.removeItem("expiration");
-    localStorage.removeItem("token");
+    dispatch(logout());
     navigate("/");
   };
 };
