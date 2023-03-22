@@ -4,10 +4,12 @@ import storage from "redux-persist/lib/storage"; // defaults to localStorage for
 import authReducer from "./authReducer";
 import thunk from "redux-thunk";
 import companyReducer from "./companyReducer";
+import uiReducer from "./uiReducer";
 
 const reducers = combineReducers({
   auth: authReducer,
   company: companyReducer,
+  ui: uiReducer,
 });
 
 const persistConfig = {

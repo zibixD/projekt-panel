@@ -18,8 +18,10 @@ const columns = [
 ];
 
 const CompanyDetail = () => {
-  const details = useSelector((state) => state.company.details)
-  const isLoadingDetails = useSelector((state) => state.company.isLoadingDetails)
+  const details = useSelector((state) => state.company.details);
+  const isLoadingDetails = useSelector(
+    (state) => state.company.isLoadingDetails
+  );
   const [value, setValue] = useState(0);
   const member = useSelector((state) => state.company.users);
   const params = useParams();
@@ -28,11 +30,17 @@ const CompanyDetail = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchCompanyData(params.id))
-    dispatch(fetchCompanyUsers(params.id))
+    try {
+      dispatch(fetchCompanyData(params.id));
+    } catch (e) {
+      console.log(e);
+      navigate("/firmy");
+    }
+
+    dispatch(fetchCompanyUsers(params.id));
   }, [params]);
 
-  const changeHandler = (event, newValue) => {
+  const changeHandler = (_event, newValue) => {
     setValue(newValue);
   };
 
@@ -42,107 +50,111 @@ const CompanyDetail = () => {
 
   return (
     <>
-      {isLoadingDetails
-      ? 
-      <Box sx={{
-        display: "flex",
-        placeContent: "center",
-        alignItems: "center"
-      }}>
-        <CircularProgress/>
-      </Box>
-      :
-      ( 
-      <>
-      {details && (
+      {isLoadingDetails ? (
+        <Box
+          sx={{
+            display: "flex",
+            placeContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <CircularProgress />
+        </Box>
+      ) : (
         <>
-          <Card
-            sx={{
-              display: "flex",
-              backgroundColor: "primary.light",
-              color: "white",
-            }}
-          >
-            <Box onClick={backHandler} sx={{
-              paddingLeft: 4
-            }}>
-            <HomeIcon />
-            </Box>
-
-            
-            <Typography
-              variant="h4"
-              sx={{
-                height: 50,
-                width: "100%",
-                padding: 6,
-              }}
-            >
-              {details?.name ? details.name : "Nie podano"}
-            </Typography>
-            <Button
-              onClick={logout}
-              sx={{
-                color: "white",
-                width: 250,
-                paddingRight: 2,
-                fontSize: 20,
-              }}
-            >
-              Wyloguj
-            </Button>
-          </Card>
-          <Tabs
-            value={value}
-            onChange={changeHandler}
-            aria-label="basic tabs example"
-          >
-            <Tab label="Szczegóły firmy" />
-            <Tab label="Pracownicy" />
-          </Tabs>
-          <TabContext value={value}>
-            <Card
-              sx={{
-                padding: 5,
-                boxShadow: 5,
-              }}
-            >
-              <TabPanel value={0}>
-                <Typography variant="h5">
-                  Nazwa firmy: {details?.name ? details.name : "Brak"}
-                </Typography>
-                <Typography variant="body1">
-                  NIP: {details?.nip ? details.nip : "Brak"}
-                </Typography>
-                <Typography variant="body1">
-                  Miasto: {details?.city ? details.city : "Brak"}
-                </Typography>
-                <Typography variant="body1">
-                  Ulica: {details?.street ? details.street : "Brak"}
-                </Typography>
-                <Typography variant="body1">
-                  Numer domu:{" "}
-                  {details?.houseNumber ? details.houseNumber : "Brak"}
-                </Typography>
-                <Typography variant="body1">
-                  Numer lokalu:{" "}
-                  {details?.apartmentNumber ? details.apartmentNumber : "Brak"}
-                </Typography>
-                <Typography variant="body1">
-                  Kod pocztowy:{" "}
-                  {details?.postalCode ? details.postalCode : "Brak"}
-                </Typography>
-              </TabPanel>
-              <TabPanel value={1}>
-                <Box style={{ height: 500 }}>
-                  <DataGrid rows={member} columns={columns} />
+          {details && (
+            <>
+              <Card
+                sx={{
+                  display: "flex",
+                  backgroundColor: "primary.light",
+                  color: "white",
+                }}
+              >
+                <Box
+                  onClick={backHandler}
+                  sx={{
+                    paddingLeft: 4,
+                  }}
+                >
+                  <HomeIcon />
                 </Box>
-              </TabPanel>
-            </Card>
-          </TabContext>
-        </>
-      )}
-      {/* <Button
+
+                <Typography
+                  variant="h4"
+                  sx={{
+                    height: 50,
+                    width: "100%",
+                    padding: 6,
+                  }}
+                >
+                  {details?.name ? details.name : "Nie podano"}
+                </Typography>
+                <Button
+                  onClick={logout}
+                  sx={{
+                    color: "white",
+                    width: 250,
+                    paddingRight: 2,
+                    fontSize: 20,
+                  }}
+                >
+                  Wyloguj
+                </Button>
+              </Card>
+              <Tabs
+                value={value}
+                onChange={changeHandler}
+                aria-label="basic tabs example"
+              >
+                <Tab label="Szczegóły firmy" />
+                <Tab label="Pracownicy" />
+              </Tabs>
+              <TabContext value={value}>
+                <Card
+                  sx={{
+                    padding: 5,
+                    boxShadow: 5,
+                  }}
+                >
+                  <TabPanel value={0}>
+                    <Typography variant="h5">
+                      Nazwa firmy: {details?.name ? details.name : "Brak"}
+                    </Typography>
+                    <Typography variant="body1">
+                      NIP: {details?.nip ? details.nip : "Brak"}
+                    </Typography>
+                    <Typography variant="body1">
+                      Miasto: {details?.city ? details.city : "Brak"}
+                    </Typography>
+                    <Typography variant="body1">
+                      Ulica: {details?.street ? details.street : "Brak"}
+                    </Typography>
+                    <Typography variant="body1">
+                      Numer domu:{" "}
+                      {details?.houseNumber ? details.houseNumber : "Brak"}
+                    </Typography>
+                    <Typography variant="body1">
+                      Numer lokalu:{" "}
+                      {details?.apartmentNumber
+                        ? details.apartmentNumber
+                        : "Brak"}
+                    </Typography>
+                    <Typography variant="body1">
+                      Kod pocztowy:{" "}
+                      {details?.postalCode ? details.postalCode : "Brak"}
+                    </Typography>
+                  </TabPanel>
+                  <TabPanel value={1}>
+                    <Box style={{ height: 500 }}>
+                      <DataGrid rows={member} columns={columns} />
+                    </Box>
+                  </TabPanel>
+                </Card>
+              </TabContext>
+            </>
+          )}
+          {/* <Button
         sx={{
           display: "flex",
         }}
@@ -150,7 +162,8 @@ const CompanyDetail = () => {
       >
         Cofnij
       </Button> */}
-      </> )}
+        </>
+      )}
     </>
   );
 };

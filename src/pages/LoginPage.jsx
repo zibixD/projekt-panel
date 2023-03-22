@@ -3,9 +3,6 @@ import { dispatch } from "../store/storeMain";
 
 import LoginForm from "../components/LoginForm";
 import { login } from "../store/authReducer";
-import { Alert, Snackbar } from "@mui/material";
-import { Stack } from "@mui/system";
-import AlertItem from "../UI/AlertItem";
 
 const LoginPage = () => {
   return <LoginForm />;
@@ -18,24 +15,18 @@ export async function action({ request }) {
   const username = formData.get("email");
   const password = formData.get("password");
 
-  if (username !== "admin@polskagrupa.it" || password !== "admin") {
-    <Alert severity="warning">Niepoprawny email lub hasło</Alert>
-    return null;
-  } else {
-    <Alert severity="success">Działa</Alert>
-  }
-
-
   const response = await fetch("https://dev.pgitdev.pl/auth/v2/user/login", {
     method: "post",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ username, password }),
   });
 
-  await new Promise((resolve) => setTimeout(resolve, 1000));
-
   if (response.status === 422 || response.status === 401) {
-    return response;
+    throw Error("???");
+  }
+
+  if (response.status === 400) {
+    return json({ error: "Niepoprawny login i hasło" });
   }
 
   if (!response.ok) {
@@ -49,7 +40,13 @@ export async function action({ request }) {
   const expiration = new Date();
   expiration.setHours(expiration.getHours() + 2);
 
-  await dispatch(login({ token: token, refreshToken: refreshToken, expiration: expiration.toISOString() }));
+  await dispatch(
+    login({
+      token: token,
+      refreshToken: refreshToken,
+      expiration: expiration.toISOString(),
+    })
+  );
 
   return redirect("firmy");
 }
