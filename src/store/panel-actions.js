@@ -5,6 +5,8 @@ import {
   setDetails,
   setUsers,
 } from "./companyReducer";
+import { showErrorSnack } from "./ui-actions";
+import { redirect } from "react-router-dom";
 
 export const getCompaniesList = () => async (dispatch) => {
   await dispatch(getCompanies());
@@ -19,7 +21,7 @@ export const fetchCompanyData = (id) => async (dispatch) => {
   if (response && response.status !== 404) {
     await dispatch(setDetails(response.data));
   } else {
-    throw Error("Nie znaleziono firmy");
+    await dispatch(showErrorSnack("Nie znaleziono firmy"));
   }
 };
 

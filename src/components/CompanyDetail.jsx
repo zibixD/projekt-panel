@@ -24,21 +24,22 @@ const CompanyDetail = () => {
   );
   const [value, setValue] = useState(0);
   const member = useSelector((state) => state.company.users);
+  const error = useSelector((state) => state.ui.error);
   const params = useParams();
   const logout = useLogout();
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   useEffect(() => {
-    try {
-      dispatch(fetchCompanyData(params.id));
-    } catch (e) {
-      console.log(e);
-      navigate("/firmy");
-    }
-
+    dispatch(fetchCompanyData(params.id));
     dispatch(fetchCompanyUsers(params.id));
   }, [params]);
+
+  useEffect(() => {
+    if (error.visible && error.message == "Nie znaleziono firmy") {
+      navigate("/firmy");
+    }
+  }, [error]);
 
   const changeHandler = (_event, newValue) => {
     setValue(newValue);
