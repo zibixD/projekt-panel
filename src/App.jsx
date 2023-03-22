@@ -6,12 +6,15 @@ import { persistor, store } from "./store/storeMain";
 import { PersistGate } from "redux-persist/integration/react";
 import { Provider } from "react-redux";
 import Alerts from "./UI/Alerts/Alerts";
+import ErrorPage
+ from "./pages/ErrorPage";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <LoginPage />,
     action: authAction,
+    errorElement: <ErrorPage/>
   },
   {
     path: "firmy",

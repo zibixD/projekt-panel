@@ -15,6 +15,7 @@ const columns = [
 
 const CompanyList = () => {
   const companies = useSelector((state) => state.company.companies);
+  const error = useSelector((state) => state.ui.error)
   const navigate = useNavigate();
   const logout = useLogout();
   const isMobile = useIsMobile();
@@ -23,6 +24,13 @@ const CompanyList = () => {
   useEffect(() => {
     dispatch(getCompaniesList());
   }, []);
+
+    useEffect(() => {
+    if (error.visible && error.message == "Nie znaleziono firmy") {
+      navigate("/firmy");
+    }
+  }, [error]);
+
 
   const doubleClickHandler = (idCompany) => {
     const foundCompany = companies.find((c) => c.id == idCompany);

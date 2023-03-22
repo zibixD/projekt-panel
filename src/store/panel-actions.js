@@ -6,7 +6,6 @@ import {
   setUsers,
 } from "./companyReducer";
 import { showErrorSnack } from "./ui-actions";
-import { redirect } from "react-router-dom";
 
 export const getCompaniesList = () => async (dispatch) => {
   await dispatch(getCompanies());
