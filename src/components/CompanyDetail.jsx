@@ -70,6 +70,7 @@ const CompanyDetail = () => {
                   display: "flex",
                   backgroundColor: "primary.light",
                   color: "white",
+                  alignItems: "center"
                 }}
               >
                 <Box
