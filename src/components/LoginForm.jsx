@@ -2,6 +2,7 @@ import { Form, useNavigation } from "react-router-dom";
 import { Box, TextField, Button, FormControl, Typography } from "@mui/material";
 
 import { useState } from "react";
+import AlertItem from "../UI/AlertItem";
 
 const LoginForm = () => {
   const [filledE, setFilledE] = useState();
@@ -76,7 +77,7 @@ const LoginForm = () => {
               onChange={(event) => setFilledP(event.target.value)}
             />
           </Box>
-          <Button
+          <AlertItem
             sx={{
               height: 50,
               width: { sx: "100%", sm: 500 },
@@ -86,7 +87,11 @@ const LoginForm = () => {
             disabled={!filledE || !filledP || isSubmitting}
           >
             {isSubmitting ? "zatwierdzanie" : "zaloguj"}
-          </Button>
+          </AlertItem>
+          {/* <AlertItem
+            type="submit"
+            disabled={!filledE || !filledP || isSubmitting}
+          ></AlertItem> */}
         </Form>
       </Box>
     </Box>

@@ -11,10 +11,12 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <LoginPage />,
-    errorElement: <ErrorPage />,
     action: authAction,
   },
-  { path: "firmy", element: <HomePage /> },
+  { 
+    path: "firmy",
+    element: <HomePage />
+  },
   {
     path: "firmy/:id",
     element: <CompanyDetailPage />,

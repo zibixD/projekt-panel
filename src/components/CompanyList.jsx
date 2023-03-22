@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { useIsMobile } from "../hooks/useIsMobile";
 import { useLogout } from "../hooks/useLogout";
 import { getCompaniesList } from "../store/panel-actions";
-import DebugButton from "./DebugButton";
+// import DebugButton from "./DebugButton";
 
 const columns = [
   { field: "name", headerName: "Nazwa firmy", width: 150 },

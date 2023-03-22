@@ -1,27 +1,17 @@
-import { useRouteError } from "react-router-dom"
+import ErrorContent from "../components/ErrorContent";
 
 const ErrorPage = () => {
-    
-    const error = useRouteError()
+    const error = useRouteError();
 
-    let title = "Wystąpił błąd"
-    let message = "Coś poszło nie tak"
-
-    if(error.status === 401 || error.status === 500){
-        message = error.data.message;
-    }
+    let title = "Wystapił błąd";
+    let message ="Spróbuj ponownie";
 
     if(error.status === 404){
-        title = "Nie znaleziono strony"
-        message = "Wróć do strony logowania"
+        title = "Kod błędu 404"
+        message = "Nie znaleziono szukanej strony"
     }
-    
-    return(
-        <div>
-            <h1 title={title}>{title}</h1>
-            <p>{message}</p>
-        </div>
-    )
+
+    return <ErrorContent title={title}>{message}</ErrorContent>
 }
 
 export default ErrorPage

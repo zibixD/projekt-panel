@@ -3,6 +3,9 @@ import { dispatch } from "../store/storeMain";
 
 import LoginForm from "../components/LoginForm";
 import { login } from "../store/authReducer";
+import { Alert, Snackbar } from "@mui/material";
+import { Stack } from "@mui/system";
+import AlertItem from "../UI/AlertItem";
 
 const LoginPage = () => {
   return <LoginForm />;
@@ -16,9 +19,12 @@ export async function action({ request }) {
   const password = formData.get("password");
 
   if (username !== "admin@polskagrupa.it" || password !== "admin") {
-    alert("Niepoprawny email lub hasło");
+    <Alert severity="warning">Niepoprawny email lub hasło</Alert>
     return null;
+  } else {
+    <Alert severity="success">Działa</Alert>
   }
+
 
   const response = await fetch("https://dev.pgitdev.pl/auth/v2/user/login", {
     method: "post",
