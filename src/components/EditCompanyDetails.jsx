@@ -7,12 +7,12 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from "yup"
 
 const shema = yup.object({
-    nip: yup.number().required().integer().positive(),
+    nip: yup.string().required(),
     city: yup.string(),
     street: yup.string(),
-    // houseNumber:
-    apartmentNumber: yup.number().integer().positive(),
-    postalCode: yup.number().positive(),
+    houseNumber: yup.string(),
+    apartmentNumber: yup.string(),
+    postalCode: yup.string(),
 })
 
 const EditCompanyDetails = () => {
@@ -25,7 +25,6 @@ const EditCompanyDetails = () => {
         console.log(data)
     }
 
-    console.log(shema)
 
     return (
         <Box>
@@ -34,9 +33,11 @@ const EditCompanyDetails = () => {
                     <TextField
 
                         label="NIP"
-                        id="nip"
+                        name="nip"
+
                         defaultValue={editDetails.nip}
-                        {...register("NIP", { maxLength: 10, minLength: 10})}        
+                        {...register("NIP", { maxLength: 10, minLength: 10})}
+                        // onChange={editHandler}        
                     />
 
                     </Box>
@@ -44,7 +45,7 @@ const EditCompanyDetails = () => {
                     <TextField
 
                         label="Miasto"
-                        id="miasto"
+                        name="miasto"
                         defaultValue={editDetails.city}
                         // {...register}
                     />
@@ -53,7 +54,7 @@ const EditCompanyDetails = () => {
                     <TextField
                         
                         label="Ulica"
-                        id="ulica"
+                        name="ulica"
                         defaultValue={editDetails.street}
                         // {...register}
                     />
@@ -62,7 +63,7 @@ const EditCompanyDetails = () => {
                     <TextField
                         
                         label="Numer domu"
-                        id="numer domu"
+                        name="numer-domu"
                         defaultValue={editDetails.houseNumber}
                         // {...register}
                     />
@@ -71,7 +72,7 @@ const EditCompanyDetails = () => {
                     <TextField
                         
                         label="Numer lokalu"
-                        id="numer lokalu"
+                        name="numer-lokalu"
                         defaultValue={editDetails.apartmentNumber}
                         // {...register}
                     />
@@ -80,12 +81,12 @@ const EditCompanyDetails = () => {
                     <TextField
                         
                         label="Kod pocztowy"
-                        id="kod pocztowy"
+                        name="kod-pocztowy"
                         defaultValue={editDetails.postalCode}
                         // {...register}
                     />
                 </Box>
-                <Button>Zapisz</Button>
+                <Button type="submit" >Zapisz</Button>
             </Form>
         </Box>
     )
