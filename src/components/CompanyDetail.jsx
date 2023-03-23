@@ -49,6 +49,10 @@ const CompanyDetail = () => {
     navigate(-1);
   };
 
+  const editHandler = () => {
+    navigate(`/firmy/${params.id}/edit`)
+  }
+
   return (
     <>
       {isLoadingDetails ? (
@@ -147,6 +151,9 @@ const CompanyDetail = () => {
                       {details?.postalCode ? details.postalCode : "Brak"}
                     </Typography>
                   </TabPanel>
+                    <Button variant="contained" size="medium" onClick={editHandler} >Edytuj
+                      {/* <Link to="edit">Edit</Link> */}
+                    </Button>
                   <TabPanel value={1}>
                     <Box style={{ height: 500 }}>
                       <DataGrid rows={member} columns={columns} />

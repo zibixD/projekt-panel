@@ -8,6 +8,7 @@ import { Provider } from "react-redux";
 import Alerts from "./UI/Alerts/Alerts";
 import ErrorPage
  from "./pages/ErrorPage";
+import EditDetailsPage from "./pages/EditDetailsPage";
 
 const router = createBrowserRouter([
   {
@@ -22,7 +23,17 @@ const router = createBrowserRouter([
   },
   {
     path: "firmy/:id",
-    element: <CompanyDetailPage />,
+    id: 'detail-id',
+    children: [
+      {
+        index: true,
+        element: <CompanyDetailPage />, 
+      },
+      {
+        path: "edit",
+        element: <EditDetailsPage/>
+      }
+    ]
   },
 ]);
 
