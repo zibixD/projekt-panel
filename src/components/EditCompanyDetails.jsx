@@ -1,4 +1,4 @@
-import { TextField, Button } from "@mui/material";
+import { TextField, Button, Typography, Card } from "@mui/material";
 import { Box } from "@mui/system";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
@@ -48,10 +48,44 @@ const EditCompanyDetails = () => {
   };
 
   return (
-    <Box>
+    <Box sx={{
+      display: "flex",
+         flexDirection: "column",
+         alignItems: "center",
+    }}>
+      <Card sx={{
+        backgroundColor: "primary.light",
+        width: "100%",
+        color: "white",
+        textAlign: "center",
+        boxShadow: 5,
+        marginBottom: 0.3
+
+      }}>
+        <Typography variant="h3" sx={{
+          height: 50,
+          padding: 4
+        }}>{editDetails.name}</Typography>
+        <Typography variant="subtitle1" sx={{
+          paddingBottom: 0.5
+        }}>edytuj dane firmy </Typography>
+      </Card>
+      <Card sx={{
+        padding: 8,
+        boxShadow: 5,
+        width: { sx: "100%", sm: 600}
+      }}
+      >
+      
       <form onSubmit={handleSubmit(onSubmit)}>
         <Box>
           <TextField
+            sx={{
+              mb: 5,
+              mt: 5,
+              mx: 5,
+              width: { sx: "100%", sm: 500 }
+            }}
             label="Nazwa firmy"
             name="name"
             defaultValue={editDetails.name}
@@ -61,6 +95,11 @@ const EditCompanyDetails = () => {
         </Box>
         <Box>
           <TextField
+          sx={{
+            mb: 5,
+            mx: 5,
+            width: { sx: "100%", sm: 500 }
+          }}
             label="NIP"
             name="nip"
             defaultValue={editDetails.nip}
@@ -70,6 +109,11 @@ const EditCompanyDetails = () => {
         </Box>
         <Box>
           <TextField
+          sx={{
+            mb: 5,
+            mx: 5,
+            width: { sx: "100%", sm: 500 }
+          }}
             label="Miasto"
             name="city"
             defaultValue={editDetails.city}
@@ -79,6 +123,11 @@ const EditCompanyDetails = () => {
         </Box>
         <Box>
           <TextField
+          sx={{
+            mb: 5,
+            mx: 5,
+            width: { sx: "100%", sm: 500 }
+          }}
             label="Ulica"
             name="street"
             defaultValue={editDetails.street}
@@ -88,6 +137,11 @@ const EditCompanyDetails = () => {
         </Box>
         <Box>
           <TextField
+          sx={{
+            mb: 5,
+            mx: 5,
+            width: { sx: "100%", sm: 500 }
+          }}
             label="Numer domu"
             name="houseNumber"
             defaultValue={editDetails.houseNumber}
@@ -97,6 +151,11 @@ const EditCompanyDetails = () => {
         </Box>
         <Box>
           <TextField
+          sx={{
+            mb: 5,
+            mx: 5,
+            width: { sx: "100%", sm: 500 }
+          }}
             label="Numer lokalu"
             name="apartmentNumber"
             defaultValue={editDetails.apartmentNumber}
@@ -106,6 +165,11 @@ const EditCompanyDetails = () => {
         </Box>
         <Box>
           <TextField
+          sx={{
+            mb: 4.3,
+            mx: 5,
+            width: { sx: "100%", sm: 500 }
+          }}
             label="Kod pocztowy"
             name="postalCode"
             error={!!errors.postalCode}
@@ -113,8 +177,14 @@ const EditCompanyDetails = () => {
             {...register("postalCode")}
           />
         </Box>
-        <Button type="submit">Zapisz</Button>
+        <Button type="submit"
+        sx={{
+          height: 50,
+          width: { sx: "100%", sm: 500 },
+          mx: 5,
+        }}>Zapisz</Button>
       </form>
+      </Card>
     </Box>
   );
 };
