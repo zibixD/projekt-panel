@@ -18,7 +18,7 @@ const schema = yup.object({
   postalCode: yup
     .string()
     .required()
-    .test({ name: "validPostalCode", test: (v) => v.match(/\d{2}-\d{3}/g) }),
+    .test({ name: "validPostalCode", test: (v) => v.match(/^\d{2}-\d{3}$/g) }),
 });
 
 const EditCompanyDetails = () => {

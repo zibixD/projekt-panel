@@ -30,8 +30,8 @@ const uiSlice = createSlice({
       state.error.visible = false;
     },
     hideSuccess(state) {
-      state.error.message = null;
-      state.error.visible = false;
+      state.success.message = null;
+      state.success.visible = false;
     },
   },
 });

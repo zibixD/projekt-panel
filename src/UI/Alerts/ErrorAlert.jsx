@@ -20,7 +20,7 @@ const ErrorAlert = () => {
   };
 
   return (
-    <Snackbar open={error.visible}>
+    <Snackbar open={error.visible} onClose={closeHandler}>
       <Alert severity="error">{error.message}</Alert>
     </Snackbar>
   );
