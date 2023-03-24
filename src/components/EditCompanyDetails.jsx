@@ -1,10 +1,11 @@
 import { TextField, Button } from "@mui/material";
 import { Box} from "@mui/system";
 import { useForm } from "react-hook-form";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Form } from "react-router-dom";
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from "yup"
+import { updateDetails } from "../store/companyReducer";
 
 const shema = yup.object({
     nip: yup.string().required(),
@@ -20,15 +21,17 @@ const EditCompanyDetails = () => {
         resolver: yupResolver(shema)
     });
     const editDetails = useSelector((state) => state.company.details)
- 
+    const dispatch = useDispatch();
+
     const onSubmit = data => {
+        dispatch(updateDetails(data));
         console.log(data)
     }
 
 
     return (
         <Box>
-            <Form onSubmit={handleSubmit(onSubmit)}>
+            <Form onSubmit={handleSubmit(onSubmit)} method="put" action="">
                 <Box>
                     <TextField
 

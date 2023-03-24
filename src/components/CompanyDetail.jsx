@@ -85,7 +85,6 @@ const CompanyDetail = () => {
                 >
                   <HomeIcon />
                 </Box>
-
                 <Typography
                   variant="h4"
                   sx={{
@@ -152,7 +151,6 @@ const CompanyDetail = () => {
                     </Typography>
                   </TabPanel>
                     <Button variant="contained" size="medium" onClick={editHandler} >Edytuj
-                      {/* <Link to="edit">Edit</Link> */}
                     </Button>
                   <TabPanel value={1}>
                     <Box style={{ height: 500 }}>
@@ -163,14 +161,6 @@ const CompanyDetail = () => {
               </TabContext>
             </>
           )}
-          {/* <Button
-        sx={{
-          display: "flex",
-        }}
-        onClick={backHandler}
-      >
-        Cofnij
-      </Button> */}
         </>
       )}
     </>

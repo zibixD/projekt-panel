@@ -27,6 +27,9 @@ const companySlice = createSlice({
       state.details = action.payload;
       state.isLoadingDetails = false;
     },
+    updateDetails(state, action) {
+      state.details = action.payload;
+    },
     setUsers(state, action) {
       state.users = action.payload;
       state.isLoadingUsers = false;
@@ -34,7 +37,7 @@ const companySlice = createSlice({
   },
 });
 
-export const { getCompanies, setCompanies, setDetails, setUsers } = companySlice.actions;
+export const { getCompanies, setCompanies, setDetails, updateDetails, setUsers } = companySlice.actions;
 export default companySlice.reducer;
 
 
