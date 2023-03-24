@@ -3,10 +3,8 @@ import {
   getCompanies,
   setCompanies,
   setDetails,
-  updateDetails,
   setUsers,
 } from "./companyReducer";
-import { dispatch } from "./storeMain";
 import { showErrorSnack } from "./ui-actions";
 
 export const getCompaniesList = () => async (dispatch) => {
@@ -26,11 +24,9 @@ export const fetchCompanyData = (id) => async (dispatch) => {
   }
 };
 
-export const updateCompanyData = (id) => async (dispatch) => {
-  const response = await companyService.putDetails(id);
-
-  await dispatch(updateDetails(response.data))
-}
+export const updateCompanyData = (id, data) => async (dispatch) => {
+  await companyService.putDetails(id);
+};
 
 export const fetchCompanyUsers = (id) => async (dispatch) => {
   const data = await companyService.getUser(id);

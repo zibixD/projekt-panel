@@ -1,12 +1,7 @@
 import EditCompanyDetails from "../components/EditCompanyDetails";
 
 const EditDetailsPage = () => {
-
-    return <EditCompanyDetails/>
-}
+  return <EditCompanyDetails />;
+};
 
 export default EditDetailsPage;
-
-export async function action({ request }) {
-    
-}
