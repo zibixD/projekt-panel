@@ -7,7 +7,7 @@ const SuccessAlert = () => {
   const success = useSelector((state) => state.ui.success);
   const dispatch = useDispatch();
 
-  useEffect(() => {
+ useEffect(() => {
     if (success.visible) {
       setTimeout(() => {
         closeHandler();
@@ -20,7 +20,7 @@ const SuccessAlert = () => {
   };
 
   return (
-    <Snackbar open={success.visible} onClose={closeHandler}>
+    <Snackbar open={success.visible}>
       <Alert severity="success">{success.message}</Alert>
     </Snackbar>
   );
