@@ -34,14 +34,17 @@ const EditCompanyDetails = () => {
   const dispatch = useDispatch();
 
   const onSubmit = async (data) => {
-    await companyService.putDetails(editDetails.id, data).then(async (res) => {
-      if (res.status === 200) {
-        await dispatch(showSuccessSnack("Pomyślnie edytowano firmę"));
-        navigate(-1);
-      } else {
+    await companyService
+      .putDetails(editDetails.id, data)
+      .then(async (res) => {
+        if (res.status === 200) {
+          await dispatch(showSuccessSnack("Pomyślnie edytowano firmę"));
+          navigate(-1);
+        }
+      })
+      .catch(async () => {
         await dispatch(showErrorSnack("Wystąpił błąd podczas edycji firmy"));
-      }
-    });
+      });
   };
 
   return (
