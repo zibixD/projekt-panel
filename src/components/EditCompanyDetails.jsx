@@ -10,7 +10,7 @@ import { showErrorSnack, showSuccessSnack } from "../store/ui-actions";
 import HomeIcon from "../UI/HomeIcon";
 import ConfirmSlide from "../UI/Alerts/ConfirmAlert";
 import { useIsAuthenticated } from "../hooks/useIsAuthenticated";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 const schema = yup.object({
   name: yup.string().required(),
@@ -37,6 +37,7 @@ const EditCompanyDetails = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const isAuth = useIsAuthenticated()
+  const [isChanged, setIsChanged] = useState(false)
 
   useEffect(() => {
     if(!isAuth) {
@@ -57,7 +58,22 @@ const EditCompanyDetails = () => {
       .catch(async () => {
         await dispatch(showErrorSnack("Wystąpił błąd podczas edycji firmy"));
       });
-  };
+    };
+
+    let editedData = editDetails;
+    // console.log(editedData)
+    const changeHandler = event => {
+      if(editedData !== event.target.value ) {
+        console.log("zmiana")
+      
+      } else if(editedData === event.target.value){
+        setIsChanged(true)
+        console.log(isC)
+        
+      }   
+      console.log(event.target.value)
+  }
+
 
   return (
     <Box sx={{
@@ -73,18 +89,18 @@ const EditCompanyDetails = () => {
         boxShadow: 5,
         marginBottom: 0.3,
         display: "flex",
-        alignItems: "center",
-        justifyContent: "center"
+          alignItems: "center",
+          justifyContent: "center"
       }}>
        <Box>
-          <ConfirmSlide>
-            <HomeIcon />
-          </ConfirmSlide>
+        <ConfirmSlide>
+          <HomeIcon/>
+        </ConfirmSlide>
       </Box>
       <Box sx={{
           display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
+            flexDirection: "column",
+            alignItems: "center",
           width: "90%"
          }}>
         <Typography variant="h3" sx={{
@@ -107,7 +123,7 @@ const EditCompanyDetails = () => {
       }}
       >
       
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form onChange={changeHandler} onSubmit={handleSubmit(onSubmit)}>
         <Box>
           <TextField
             sx={{

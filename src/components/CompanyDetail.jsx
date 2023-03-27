@@ -150,7 +150,7 @@ const CompanyDetail = () => {
                       {details?.postalCode ? details.postalCode : "Brak"}
                     </Typography>
                     <Button variant="contained" size="medium" onClick={editHandler} sx={{
-                      marginTop: 2 
+                      marginTop: 1.5 
                     }} >Edytuj
                     </Button>
                   </TabPanel>
