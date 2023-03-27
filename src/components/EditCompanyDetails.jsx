@@ -7,6 +7,10 @@ import * as yup from "yup";
 import { companyService } from "../services/companyService";
 import { useNavigate } from "react-router-dom";
 import { showErrorSnack, showSuccessSnack } from "../store/ui-actions";
+import HomeIcon from "../UI/HomeIcon";
+import ConfirmSlide from "../UI/Alerts/ConfirmAlert";
+import { useIsAuthenticated } from "../hooks/useIsAuthenticated";
+import { useEffect } from "react";
 
 const schema = yup.object({
   name: yup.string().required(),
@@ -32,6 +36,14 @@ const EditCompanyDetails = () => {
   const editDetails = useSelector((state) => state.company.details);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const isAuth = useIsAuthenticated()
+
+  useEffect(() => {
+    if(!isAuth) {
+      navigate("/")
+    }
+  }, [isAuth])
+  
 
   const onSubmit = async (data) => {
     await companyService
@@ -52,16 +64,29 @@ const EditCompanyDetails = () => {
       display: "flex",
          flexDirection: "column",
          alignItems: "center",
-    }}>
+      }}>
       <Card sx={{
         backgroundColor: "primary.light",
         width: "100%",
         color: "white",
         textAlign: "center",
         boxShadow: 5,
-        marginBottom: 0.3
-
+        marginBottom: 0.3,
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center"
       }}>
+       <Box>
+          <ConfirmSlide>
+            <HomeIcon />
+          </ConfirmSlide>
+      </Box>
+      <Box sx={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          width: "90%"
+         }}>
         <Typography variant="h3" sx={{
           height: 50,
           padding: 4
@@ -69,8 +94,13 @@ const EditCompanyDetails = () => {
         <Typography variant="subtitle1" sx={{
           paddingBottom: 0.5
         }}>edytuj dane firmy </Typography>
+      </Box>
       </Card>
       <Card sx={{
+         display: "flex",
+            flexWrap: "wrap",
+            flexDirection: "column",
+            alignItems: "center",
         padding: 8,
         boxShadow: 5,
         width: { sx: "100%", sm: 600}

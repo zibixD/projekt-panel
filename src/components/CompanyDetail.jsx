@@ -149,9 +149,11 @@ const CompanyDetail = () => {
                       Kod pocztowy:{" "}
                       {details?.postalCode ? details.postalCode : "Brak"}
                     </Typography>
-                  </TabPanel>
-                    <Button variant="contained" size="medium" onClick={editHandler} >Edytuj
+                    <Button variant="contained" size="medium" onClick={editHandler} sx={{
+                      marginTop: 2 
+                    }} >Edytuj
                     </Button>
+                  </TabPanel>
                   <TabPanel value={1}>
                     <Box style={{ height: 500 }}>
                       <DataGrid rows={member} columns={columns} />
