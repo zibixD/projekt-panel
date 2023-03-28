@@ -39,8 +39,8 @@ const AddUsersForm = () => {
   const userId = useSelector((state) => state.auth.userId);
   const [canShowModal, setCanShowModal] = useState(false);
   const params = useParams();
-  const navigate = useNavigate()
-  const isAuth = useIsAuthenticated
+  const navigate = useNavigate();
+  const isAuth = useIsAuthenticated;
   const {
     register,
     setValue,
@@ -61,12 +61,10 @@ const AddUsersForm = () => {
   });
 
   useEffect(() => {
-    if(!isAuth) {
-      navigate("/")
+    if (!isAuth) {
+      navigate("/");
     }
-  }, [isAuth])
-
-
+  }, [isAuth]);
 
   const submitHandler = async (data) => {
     const newData = {
@@ -81,23 +79,25 @@ const AddUsersForm = () => {
     };
 
     await companyService
-    .addUser(newData)
-    .then(async (res) => {
-      if(res.status === 200) {
-        await dispatch(showSuccessSnack("Pomyślnie utworzono użytkownika"));
-        navigate(-1);
-      }
-    })
-    .catch(async () => {
-      await dispatch(showErrorSnack("Napotkano błąd podczas tworzenia użytkownika"));
-    });
+      .addUser(newData)
+      .then(async (res) => {
+        if (res.status === 200) {
+          await dispatch(showSuccessSnack("Pomyślnie utworzono użytkownika"));
+          navigate(-1);
+        }
+      })
+      .catch(async () => {
+        await dispatch(
+          showErrorSnack("Napotkano błąd podczas tworzenia użytkownika")
+        );
+      });
   };
 
   useEffect(() => {
-    if(isDirty) {
+    if (isDirty) {
       setCanShowModal(true);
     }
-  }, [isDirty])
+  }, [isDirty]);
 
   return (
     <Box
@@ -132,6 +132,12 @@ const AddUsersForm = () => {
                 width: { sx: "100%", sm: 500 },
               }}
               label="Nazwa użytkownika"
+              autoComplete="off"
+              inputProps={{
+                form: {
+                  autocomplete: "off",
+                },
+              }}
               error={!!errors.name}
               {...register("name")}
             />
@@ -211,6 +217,12 @@ const AddUsersForm = () => {
                 width: { sx: "100%", sm: 500 },
               }}
               type="password"
+              autoComplete="off"
+              inputProps={{
+                form: {
+                  autocomplete: "off",
+                },
+              }}
               label="Hasło użytkownika"
               error={!!errors.password}
               {...register("password")}
@@ -224,7 +236,13 @@ const AddUsersForm = () => {
                 width: { sx: "100%", sm: 500 },
               }}
               type="password"
+              autoComplete="off"
               label="Powtórz hasło użytkownika"
+              inputProps={{
+                form: {
+                  autocomplete: "off",
+                },
+              }}
               error={!!errors.confirmPassword}
               {...register("confirmPassword")}
             />

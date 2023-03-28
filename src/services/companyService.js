@@ -14,8 +14,8 @@ class CompanyService {
   }
 
   async putDetails(id, data) {
-    const response = await apiService.put(`/admin/companies/${id}`, data)
-  
+    const response = await apiService.put(`/admin/companies/${id}`, data);
+
     return response;
   }
 
@@ -25,12 +25,11 @@ class CompanyService {
     return response.data;
   }
 
-  async addUser(id, data) {
-    const response = await apiService.post(`/admin/users`, data)
-    
-    return response
-  }
+  async addUser(data) {
+    const response = await apiService.post(`/admin/users`, data);
 
+    return response;
+  }
 }
 
 export const companyService = new CompanyService();
