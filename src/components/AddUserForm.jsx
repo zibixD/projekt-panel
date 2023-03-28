@@ -15,8 +15,12 @@ import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { boolean, string } from "yup";
+import { companyService } from "../services/companyService";
+import { dispatch } from "../store/storeMain";
+import { showErrorSnack, showSuccessSnack } from "../store/ui-actions";
+import { useIsAuthenticated } from "../hooks/useIsAuthenticated";
 
 const schema = yup.object({
   name: yup.string().required(),
@@ -35,6 +39,8 @@ const AddUsersForm = () => {
   const userId = useSelector((state) => state.auth.userId);
   const [canShowModal, setCanShowModal] = useState(false);
   const params = useParams();
+  const navigate = useNavigate()
+  const isAuth = useIsAuthenticated
   const {
     register,
     setValue,
@@ -54,6 +60,14 @@ const AddUsersForm = () => {
     },
   });
 
+  useEffect(() => {
+    if(!isAuth) {
+      navigate("/")
+    }
+  }, [isAuth])
+
+
+
   const submitHandler = async (data) => {
     const newData = {
       companyId: data.companyId,
@@ -66,8 +80,24 @@ const AddUsersForm = () => {
       createdBy: userId,
     };
 
-    console.log(newData);
+    await companyService
+    .addUser(newData)
+    .then(async (res) => {
+      if(res.status === 200) {
+        await dispatch(showSuccessSnack("Pomyślnie utworzono użytkownika"));
+        navigate(-1);
+      }
+    })
+    .catch(async () => {
+      await dispatch(showErrorSnack("Napotkano błąd podczas tworzenia użytkownika"));
+    });
   };
+
+  useEffect(() => {
+    if(isDirty) {
+      setCanShowModal(true);
+    }
+  }, [isDirty])
 
   return (
     <Box
@@ -180,6 +210,7 @@ const AddUsersForm = () => {
                 mx: 5,
                 width: { sx: "100%", sm: 500 },
               }}
+              type="password"
               label="Hasło użytkownika"
               error={!!errors.password}
               {...register("password")}
@@ -192,6 +223,7 @@ const AddUsersForm = () => {
                 mx: 5,
                 width: { sx: "100%", sm: 500 },
               }}
+              type="password"
               label="Powtórz hasło użytkownika"
               error={!!errors.confirmPassword}
               {...register("confirmPassword")}

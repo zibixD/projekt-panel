@@ -58,8 +58,6 @@ const CompanyDetail = () => {
     navigate(`/firmy/${params.id}/add`);
   };
 
-  console.log(member);
-
   return (
     <>
       {isLoadingDetails ? (

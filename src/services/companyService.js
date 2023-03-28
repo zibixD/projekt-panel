@@ -24,6 +24,13 @@ class CompanyService {
 
     return response.data;
   }
+
+  async addUser(id, data) {
+    const response = await apiService.post(`/admin/users`, data)
+    
+    return response
+  }
+
 }
 
 export const companyService = new CompanyService();

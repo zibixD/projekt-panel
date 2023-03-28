@@ -5,6 +5,7 @@ import {
   setDetails,
   setUsers,
 } from "./companyReducer";
+import { dispatch } from "./storeMain";
 import { showErrorSnack } from "./ui-actions";
 
 export const getCompaniesList = () => async (dispatch) => {
@@ -33,3 +34,7 @@ export const fetchCompanyUsers = (id) => async (dispatch) => {
 
   await dispatch(setUsers(data));
 };
+
+export const addUser = (id, data) => async (dispatch) => {
+  await companyService.addUser(id)
+} 
