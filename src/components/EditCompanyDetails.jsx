@@ -7,10 +7,10 @@ import * as yup from "yup";
 import { companyService } from "../services/companyService";
 import { useNavigate } from "react-router-dom";
 import { showErrorSnack, showSuccessSnack } from "../store/ui-actions";
-import HomeIcon from "../UI/HomeIcon";
 import ConfirmSlide from "../UI/Alerts/ConfirmAlert";
 import { useIsAuthenticated } from "../hooks/useIsAuthenticated";
 import { useEffect, useState } from "react";
+import CardBaner from "../UI/CardBaner";
 
 const schema = yup.object({
   name: yup.string().required(),
@@ -73,49 +73,9 @@ const EditCompanyDetails = () => {
         alignItems: "center",
       }}
     >
-      <Card
-        sx={{
-          backgroundColor: "primary.light",
-          width: "100%",
-          color: "white",
-          textAlign: "center",
-          boxShadow: 5,
-          marginBottom: 0.3,
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
-        <Box>
-          <ConfirmSlide canShowModal={canShowModal} />
-        </Box>
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            width: "90%",
-          }}
-        >
-          <Typography
-            variant="h3"
-            sx={{
-              height: 50,
-              padding: 4,
-            }}
-          >
-            {editDetails.name}
-          </Typography>
-          <Typography
-            variant="subtitle1"
-            sx={{
-              paddingBottom: 0.5,
-            }}
-          >
-            edytuj dane firmy
-          </Typography>
-        </Box>
-      </Card>
+      <CardBaner title={editDetails.name} info={"Edytuj dane firmy"}>
+        <ConfirmSlide canShowModal={canShowModal}/>
+      </CardBaner>
       <Card
         sx={{
           display: "flex",

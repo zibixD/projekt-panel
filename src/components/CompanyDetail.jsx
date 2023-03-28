@@ -13,6 +13,7 @@ import HomeIcon from "../UI/HomeIcon";
 const columns = [
   { field: "id", headerName: "Identyfikator", width: 150 },
   { field: "admin", headerName: "Admin", width: 150 },
+  { field: "type", headerName: "Typ", width: 150 },
   { field: "name", headerName: "Imię", width: 150 },
   { field: "email", headerName: "Email", width: 150 },
 ];
@@ -52,6 +53,12 @@ const CompanyDetail = () => {
   const editHandler = () => {
     navigate(`/firmy/${params.id}/edit`)
   }
+
+  const addHandler = () => {
+    navigate(`/firmy/${params.id}/add`)
+  }
+
+  console.log(member)
 
   return (
     <>
@@ -157,6 +164,7 @@ const CompanyDetail = () => {
                   <TabPanel value={1}>
                     <Box style={{ height: 500 }}>
                       <DataGrid rows={member} columns={columns} />
+                      <Button onClick={addHandler}>Dodaj użytkownika</Button>
                     </Box>
                   </TabPanel>
                 </Card>

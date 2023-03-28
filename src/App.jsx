@@ -9,6 +9,7 @@ import Alerts from "./UI/Alerts/Alerts";
 import ErrorPage
  from "./pages/ErrorPage";
 import EditDetailsPage from "./pages/EditDetailsPage";
+import AddUserPage from "./pages/AddUserPage";
 
 const router = createBrowserRouter([
   {
@@ -32,7 +33,11 @@ const router = createBrowserRouter([
       {
         path: "edit",
         element: <EditDetailsPage/>
-      }
+      },
+      {
+        path: "add",
+        element: <AddUserPage/>
+      },
     ]
   },
 ]);
