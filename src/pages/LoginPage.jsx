@@ -36,6 +36,7 @@ export async function action({ request }) {
   const resData = await response.json();
   const token = resData.access_token;
   const refreshToken = resData.refresh_token;
+  const userId = resData.user_id;
 
   const expiration = new Date();
   expiration.setHours(expiration.getHours() + 2);
@@ -45,6 +46,7 @@ export async function action({ request }) {
       token: token,
       refreshToken: refreshToken,
       expiration: expiration.toISOString(),
+      userId,
     })
   );
 

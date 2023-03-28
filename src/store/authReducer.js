@@ -5,6 +5,7 @@ const initialAuthState = {
   token: "",
   refreshToken: "",
   expiration: null,
+  userId: null,
 };
 
 const authSlice = createSlice({
@@ -16,12 +17,14 @@ const authSlice = createSlice({
       state.token = action.payload.token;
       state.expiration = action.payload.expiration;
       state.refreshToken = action.payload.refreshToken;
+      state.userId = action.payload.userId;
     },
     logout(state) {
       state.isAuthenticated = false;
       state.token = "";
       state.expiration = null;
       state.refreshToken = "";
+      state.userId = null;
     },
     refreshToken(state, action) {
       state.token = action.payload.token;
