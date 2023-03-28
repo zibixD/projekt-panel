@@ -1,9 +1,11 @@
 import { Box } from "@mui/system";
 import { Card, Typography, Button, TextField } from "@mui/material";
-import { Children } from "react";
+import { useLogout } from "../hooks/useLogout";
 
 const CardBaner = (props) => {
-    return( 
+  const logout = useLogout()  
+  
+  return( 
         <Card
         sx={{
           backgroundColor: "primary.light",
@@ -17,13 +19,19 @@ const CardBaner = (props) => {
           justifyContent: "center",
         }}
       >
+        <Box
+          sx={{
+            width: "33%"
+          }}        
+        >
         {props.children}
+        </Box>
         <Box
           sx={{
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
-            width: "90%",
+            width: "34%",
           }}
         >
           <Typography
@@ -44,6 +52,18 @@ const CardBaner = (props) => {
             {props.info}
           </Typography>
         </Box>
+          <Button
+            onClick={logout}
+            sx={{
+              color: "white",
+              width: "33%",
+              paddingRight: 6,
+              fontSize: 20,
+            }}
+          >
+           Wyloguj
+          </Button>
+        
       </Card>
     )
 }

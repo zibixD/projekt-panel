@@ -40,7 +40,7 @@ const AddUsersForm = () => {
   const [canShowModal, setCanShowModal] = useState(false);
   const params = useParams();
   const navigate = useNavigate();
-  const isAuth = useIsAuthenticated;
+  const isAuth = useIsAuthenticated();
   const {
     register,
     setValue,

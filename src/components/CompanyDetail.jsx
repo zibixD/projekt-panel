@@ -5,10 +5,12 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { DataGrid } from "@mui/x-data-grid";
 import { Box } from "@mui/system";
-import { useLogout } from "../hooks/useLogout";
+
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCompanyUsers, fetchCompanyData } from "../store/panel-actions";
 import HomeIcon from "../UI/HomeIcon";
+import CardBaner from "../UI/CardBaner";
+import ConfirmSlide from "../UI/Alerts/ConfirmAlert";
 
 const columns = [
   { field: "id", headerName: "Identyfikator", width: 150 },
@@ -27,7 +29,7 @@ const CompanyDetail = () => {
   const member = useSelector((state) => state.company.users);
   const error = useSelector((state) => state.ui.error);
   const params = useParams();
-  const logout = useLogout();
+  const [canShowModal, setCanShowModal] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -74,44 +76,9 @@ const CompanyDetail = () => {
         <>
           {details && (
             <>
-              <Card
-                sx={{
-                  display: "flex",
-                  backgroundColor: "primary.light",
-                  color: "white",
-                  alignItems: "center",
-                }}
-              >
-                <Box
-                  onClick={backHandler}
-                  sx={{
-                    paddingLeft: 4,
-                  }}
-                >
-                  <HomeIcon />
-                </Box>
-                <Typography
-                  variant="h4"
-                  sx={{
-                    height: 50,
-                    width: "100%",
-                    padding: 6,
-                  }}
-                >
-                  {details?.name ? details.name : "Nie podano"}
-                </Typography>
-                <Button
-                  onClick={logout}
-                  sx={{
-                    color: "white",
-                    width: 250,
-                    paddingRight: 2,
-                    fontSize: 20,
-                  }}
-                >
-                  Wyloguj
-                </Button>
-              </Card>
+              <CardBaner title={details?.name ? details.name : "Nie podano"} info={"Szczegóły firmy"}> 
+                <ConfirmSlide canShowModal={canShowModal}></ConfirmSlide>
+              </CardBaner>
               <Tabs
                 value={value}
                 onChange={changeHandler}
