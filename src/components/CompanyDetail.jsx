@@ -51,14 +51,14 @@ const CompanyDetail = () => {
   };
 
   const editHandler = () => {
-    navigate(`/firmy/${params.id}/edit`)
-  }
+    navigate(`/firmy/${params.id}/edit`);
+  };
 
   const addHandler = () => {
-    navigate(`/firmy/${params.id}/add`)
-  }
+    navigate(`/firmy/${params.id}/add`);
+  };
 
-  console.log(member)
+  console.log(member);
 
   return (
     <>
@@ -81,7 +81,7 @@ const CompanyDetail = () => {
                   display: "flex",
                   backgroundColor: "primary.light",
                   color: "white",
-                  alignItems: "center"
+                  alignItems: "center",
                 }}
               >
                 <Box
@@ -156,9 +156,15 @@ const CompanyDetail = () => {
                       Kod pocztowy:{" "}
                       {details?.postalCode ? details.postalCode : "Brak"}
                     </Typography>
-                    <Button variant="contained" size="medium" onClick={editHandler} sx={{
-                      marginTop: 1.5 
-                    }} >Edytuj
+                    <Button
+                      variant="contained"
+                      size="medium"
+                      onClick={editHandler}
+                      sx={{
+                        marginTop: 1.5,
+                      }}
+                    >
+                      Edytuj
                     </Button>
                   </TabPanel>
                   <TabPanel value={1}>
