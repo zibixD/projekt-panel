@@ -1,6 +1,7 @@
 import {
   Button,
   Dialog,
+  IconButton,
   DialogTitle,
   DialogContent,
   Slide,
@@ -11,6 +12,7 @@ import { Box } from "@mui/system";
 import { forwardRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import HomeIcon from "../HomeIcon";
+import { Home } from "@mui/icons-material";
 
 const Transition = forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -38,9 +40,9 @@ const ConfirmSlide = ({ canShowModal }) => {
 
   return (
     <Box>
-      <Button onClick={openHandler}>
-        <HomeIcon />
-      </Button>
+      <IconButton onClick={openHandler}>
+        <Home htmlColor="white" fontSize="large" />
+      </IconButton>
       <Dialog
         open={isOpen}
         TransitionComponent={Transition}

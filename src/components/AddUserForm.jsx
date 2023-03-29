@@ -16,11 +16,11 @@ import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useNavigate, useParams } from "react-router-dom";
-import { boolean, string } from "yup";
 import { companyService } from "../services/companyService";
 import { dispatch } from "../store/storeMain";
 import { showErrorSnack, showSuccessSnack } from "../store/ui-actions";
 import { useIsAuthenticated } from "../hooks/useIsAuthenticated";
+import { useIsMobile } from "../hooks/useIsMobile";
 
 const schema = yup.object({
   name: yup.string().required(),
@@ -38,6 +38,7 @@ const AddUsersForm = () => {
   const editDetails = useSelector((state) => state.company.details);
   const userId = useSelector((state) => state.auth.userId);
   const [canShowModal, setCanShowModal] = useState(false);
+  const isMobile = useIsMobile();
   const params = useParams();
   const navigate = useNavigate();
   const isAuth = useIsAuthenticated();
@@ -112,23 +113,29 @@ const AddUsersForm = () => {
       <Card
         sx={{
           display: "flex",
-          flexWrap: "wrap",
-          flexDirection: "row",
-          justifyContent: "center",
+          flexDirection: "column",
           alignItems: "center",
           paddingY: 8,
           boxShadow: 5,
           width: { xs: "100%", sm: 600 },
         }}
       >
-        <form onSubmit={handleSubmit(submitHandler)}>
+        <form
+          style={{ width: isMobile ? "80%" : "100%" }}
+          onSubmit={handleSubmit(submitHandler)}
+        >
           <input hidden {...register("companyId")} />
 
-          <Box>
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "center",
+            }}
+          >
             <TextField
               sx={{
                 mb: 5,
-                mx: 5,
                 width: { xs: "100%", sm: 500 },
               }}
               label="Nazwa użytkownika"
@@ -142,13 +149,18 @@ const AddUsersForm = () => {
               {...register("name")}
             />
           </Box>
-          <Box sx={{ minWidth: 120 }}>
-            <FormControl fullWidth>
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "center",
+            }}
+          >
+            <FormControl fullWidth={isMobile}>
               <InputLabel
                 id="userType"
                 sx={{
                   mb: 5,
-                  mx: 5,
                 }}
               >
                 Typ użytkownika
@@ -156,7 +168,6 @@ const AddUsersForm = () => {
               <Select
                 sx={{
                   mb: 5,
-                  mx: 5,
                   width: { xs: "100%", sm: 500 },
                 }}
                 labelId="userType"
@@ -170,13 +181,19 @@ const AddUsersForm = () => {
               </Select>
             </FormControl>
           </Box>
-          <Box sx={{ minWidth: 120 }}>
-            <FormControl fullWidth>
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "center",
+              flex: 1,
+            }}
+          >
+            <FormControl fullWidth={isMobile}>
               <InputLabel
                 id="userRole"
                 sx={{
                   mb: 5,
-                  mx: 5,
                 }}
               >
                 Rola użytkownika
@@ -184,7 +201,6 @@ const AddUsersForm = () => {
               <Select
                 sx={{
                   mb: 5,
-                  mx: 5,
                   width: { xs: "100%", sm: 500 },
                 }}
                 labelId="userRole"
@@ -196,11 +212,16 @@ const AddUsersForm = () => {
               </Select>
             </FormControl>
           </Box>
-          <Box>
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "center",
+            }}
+          >
             <TextField
               sx={{
                 mb: 5,
-                mx: 5,
                 width: { xs: "100%", sm: 500 },
               }}
               type="email"
@@ -209,11 +230,16 @@ const AddUsersForm = () => {
               {...register("email")}
             />
           </Box>
-          <Box>
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "center",
+            }}
+          >
             <TextField
               sx={{
                 mb: 5,
-                mx: 5,
                 width: { xs: "100%", sm: 500 },
               }}
               type="password"
@@ -228,11 +254,16 @@ const AddUsersForm = () => {
               {...register("password")}
             />
           </Box>
-          <Box>
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "center",
+            }}
+          >
             <TextField
               sx={{
                 mb: 5,
-                mx: 5,
                 width: { xs: "100%", sm: 500 },
               }}
               type="password"
@@ -247,16 +278,22 @@ const AddUsersForm = () => {
               {...register("confirmPassword")}
             />
           </Box>
-          <Button
-            type="submit"
+          <Box
             sx={{
-              height: 50,
-              width: { xs: "100%", sm: 500 },
-              mx: 5,
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "center",
             }}
           >
-            Dodaj użytkownika
-          </Button>
+            <Button
+              type="submit"
+              sx={{
+                height: 50,
+              }}
+            >
+              Dodaj użytkownika
+            </Button>
+          </Box>
         </form>
       </Card>
     </Box>
