@@ -77,7 +77,7 @@ const CompanyDetail = () => {
           {details && (
             <>
               <CardBaner title={details?.name ? details.name : "Nie podano"} info={"Szczegóły firmy"}> 
-                <ConfirmSlide canShowModal={canShowModal}></ConfirmSlide>
+                <ConfirmSlide canShowModal={canShowModal}/>
               </CardBaner>
               <Tabs
                 value={value}

@@ -5,7 +5,7 @@ import { useLogout } from "../hooks/useLogout";
 const CardBaner = (props) => {
   const logout = useLogout()  
   
-  return( 
+  return(
         <Card
         sx={{
           backgroundColor: "primary.light",
@@ -15,13 +15,14 @@ const CardBaner = (props) => {
           boxShadow: 5,
           marginBottom: 0.3,
           display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
+            alignItems: "center",
+            justifyContent: "center",
+            flexDirection: {xs: "column", sm: "row" },
         }}
       >
         <Box
           sx={{
-            width: "33%"
+            width: { xs: "100%", sm: "20%"},
           }}        
         >
         {props.children}
@@ -31,14 +32,15 @@ const CardBaner = (props) => {
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
-            width: "34%",
+            width: { xs: "100%" ,sm: "60%"},
           }}
         >
           <Typography
             variant="h3"
             sx={{
               height: 50,
-              padding: 4,
+              padding: {xs: 1, sm: 4},
+              fontSize: {xs: 40, sm: 50},
             }}
           >
             {props.title}
@@ -56,8 +58,8 @@ const CardBaner = (props) => {
             onClick={logout}
             sx={{
               color: "white",
-              width: "33%",
-              paddingRight: 6,
+              width: {xs: "100%" ,sm:"20%"},
+              paddingRight: {xs: 0, sm: 6},
               fontSize: 20,
             }}
           >

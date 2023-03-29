@@ -43,7 +43,6 @@ const AddUsersForm = () => {
   const isAuth = useIsAuthenticated();
   const {
     register,
-    setValue,
     handleSubmit,
     formState: { errors, isDirty },
   } = useForm({
@@ -114,11 +113,12 @@ const AddUsersForm = () => {
         sx={{
           display: "flex",
           flexWrap: "wrap",
-          flexDirection: "column",
+          flexDirection: "row",
+          justifyContent: "center",
           alignItems: "center",
-          padding: 8,
+          paddingY: 8,
           boxShadow: 5,
-          width: { sx: "100%", sm: 600 },
+          width: { xs: "100%", sm: 600 },
         }}
       >
         <form onSubmit={handleSubmit(submitHandler)}>
@@ -129,7 +129,7 @@ const AddUsersForm = () => {
               sx={{
                 mb: 5,
                 mx: 5,
-                width: { sx: "100%", sm: 500 },
+                width: { xs: "100%", sm: 500 },
               }}
               label="Nazwa użytkownika"
               autoComplete="off"
@@ -157,7 +157,7 @@ const AddUsersForm = () => {
                 sx={{
                   mb: 5,
                   mx: 5,
-                  width: { sx: "100%", sm: 500 },
+                  width: { xs: "100%", sm: 500 },
                 }}
                 labelId="userType"
                 defaultValue="n"
@@ -185,7 +185,7 @@ const AddUsersForm = () => {
                 sx={{
                   mb: 5,
                   mx: 5,
-                  width: { sx: "100%", sm: 500 },
+                  width: { xs: "100%", sm: 500 },
                 }}
                 labelId="userRole"
                 error={!!errors.role}
@@ -201,7 +201,7 @@ const AddUsersForm = () => {
               sx={{
                 mb: 5,
                 mx: 5,
-                width: { sx: "100%", sm: 500 },
+                width: { xs: "100%", sm: 500 },
               }}
               type="email"
               label="Email użytkownika"
@@ -214,7 +214,7 @@ const AddUsersForm = () => {
               sx={{
                 mb: 5,
                 mx: 5,
-                width: { sx: "100%", sm: 500 },
+                width: { xs: "100%", sm: 500 },
               }}
               type="password"
               autoComplete="off"
@@ -233,7 +233,7 @@ const AddUsersForm = () => {
               sx={{
                 mb: 5,
                 mx: 5,
-                width: { sx: "100%", sm: 500 },
+                width: { xs: "100%", sm: 500 },
               }}
               type="password"
               autoComplete="off"
@@ -251,7 +251,7 @@ const AddUsersForm = () => {
             type="submit"
             sx={{
               height: 50,
-              width: { sx: "100%", sm: 500 },
+              width: { xs: "100%", sm: 500 },
               mx: 5,
             }}
           >

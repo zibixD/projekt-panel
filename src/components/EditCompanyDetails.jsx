@@ -82,9 +82,10 @@ const EditCompanyDetails = () => {
           flexWrap: "wrap",
           flexDirection: "column",
           alignItems: "center",
-          padding: 8,
+          paddingX: 8,
+          paddingY: 7,
           boxShadow: 5,
-          width: { sx: "100%", sm: 600 },
+          width: { xs: "100%", sm: 600 },
         }}
       >
         <form onSubmit={handleSubmit(onSubmit)}>
@@ -92,9 +93,8 @@ const EditCompanyDetails = () => {
             <TextField
               sx={{
                 mb: 5,
-                mt: 5,
                 mx: 5,
-                width: { sx: "100%", sm: 500 },
+                width: { xs: "100%", sm: 500 },
               }}
               label="Nazwa firmy"
               name="name"
@@ -108,7 +108,7 @@ const EditCompanyDetails = () => {
               sx={{
                 mb: 5,
                 mx: 5,
-                width: { sx: "100%", sm: 500 },
+                width: { xs: "100%", sm: 500 },
               }}
               label="NIP"
               name="nip"
@@ -122,7 +122,7 @@ const EditCompanyDetails = () => {
               sx={{
                 mb: 5,
                 mx: 5,
-                width: { sx: "100%", sm: 500 },
+                width: { xs: "100%", sm: 500 },
               }}
               label="Miasto"
               name="city"
@@ -136,7 +136,7 @@ const EditCompanyDetails = () => {
               sx={{
                 mb: 5,
                 mx: 5,
-                width: { sx: "100%", sm: 500 },
+                width: { xs: "100%", sm: 500 },
               }}
               label="Ulica"
               name="street"
@@ -150,7 +150,7 @@ const EditCompanyDetails = () => {
               sx={{
                 mb: 5,
                 mx: 5,
-                width: { sx: "100%", sm: 500 },
+                width: { xs: "100%", sm: 500 },
               }}
               label="Numer domu"
               name="houseNumber"
@@ -164,7 +164,7 @@ const EditCompanyDetails = () => {
               sx={{
                 mb: 5,
                 mx: 5,
-                width: { sx: "100%", sm: 500 },
+                width: { xs: "100%", sm: 500 },
               }}
               label="Numer lokalu"
               name="apartmentNumber"
@@ -178,7 +178,7 @@ const EditCompanyDetails = () => {
               sx={{
                 mb: 4.3,
                 mx: 5,
-                width: { sx: "100%", sm: 500 },
+                width: { xs: "100%", sm: 500 },
               }}
               label="Kod pocztowy"
               name="postalCode"
@@ -190,8 +190,7 @@ const EditCompanyDetails = () => {
           <Button
             type="submit"
             sx={{
-              height: 50,
-              width: { sx: "100%", sm: 500 },
+              width: { xs: "100%", sm: 500 },
               mx: 5,
             }}
           >

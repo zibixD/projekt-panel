@@ -49,9 +49,6 @@ const LoginForm = () => {
             boxShadow: 4,
             width: { sx: "100%", sm: 600, md: 700 },
             height: { sx: "100%", sm: 400 },
-            // padding: { sx}
-            // marginX: { sx: "0%", sm: "10%", md: "15%", lg: "30%" },
-            // marginRight: {sx: 100, sm: '10%', md: '20%', lg: '30%'},
           }}
         >
           <Form action="/" method="post">
