@@ -1,6 +1,7 @@
 import { Box } from "@mui/system";
-import { Card, Typography, Button, TextField } from "@mui/material";
+import { Card, Typography, Button } from "@mui/material";
 import { useLogout } from "../hooks/useLogout";
+import { ExitToApp } from "@mui/icons-material";
 
 const CardBaner = (props) => {
   const logout = useLogout();
@@ -63,6 +64,7 @@ const CardBaner = (props) => {
           fontSize: 20,
         }}
       >
+        <ExitToApp sx={{ mr: 1 }} />
         Wyloguj
       </Button>
     </Card>
