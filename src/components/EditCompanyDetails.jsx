@@ -5,12 +5,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { companyService } from "../services/companyService";
-import { useNavigate } from "react-router-dom";
 import { showErrorSnack, showSuccessSnack } from "../store/ui-actions";
 import ConfirmSlide from "../UI/Alerts/ConfirmAlert";
-import { useIsAuthenticated } from "../hooks/useIsAuthenticated";
 import { useEffect, useState } from "react";
 import CardBaner from "../UI/CardBaner";
+import { useIsMobile } from "../hooks/useIsMobile";
 
 const schema = yup.object({
   name: yup.string().required(),
@@ -34,16 +33,9 @@ const EditCompanyDetails = () => {
     resolver: yupResolver(schema),
   });
   const editDetails = useSelector((state) => state.company.details);
-  const navigate = useNavigate();
   const dispatch = useDispatch();
-  const isAuth = useIsAuthenticated();
   const [canShowModal, setCanShowModal] = useState(false);
-
-  useEffect(() => {
-    if (!isAuth) {
-      navigate("/");
-    }
-  }, [isAuth]);
+  const isMobile = useIsMobile()
 
   const onSubmit = async (data) => {
     await companyService
@@ -79,21 +71,26 @@ const EditCompanyDetails = () => {
       <Card
         sx={{
           display: "flex",
-          flexWrap: "wrap",
           flexDirection: "column",
           alignItems: "center",
-          paddingX: 8,
-          paddingY: 7,
+          paddingY: 8,
           boxShadow: 5,
           width: { xs: "100%", sm: 600 },
         }}
       >
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <Box>
+        <form
+          style={{ width: isMobile ? "80%" : "100%" }} 
+          onSubmit={handleSubmit(onSubmit)}>
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "center",
+            }}
+          >
             <TextField
               sx={{
                 mb: 5,
-                mx: 5,
                 width: { xs: "100%", sm: 500 },
               }}
               label="Nazwa firmy"
@@ -103,12 +100,17 @@ const EditCompanyDetails = () => {
               {...register("name")}
             />
           </Box>
-          <Box>
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "center",
+            }}
+          >
             <TextField
               sx={{
                 mb: 5,
-                mx: 5,
-                width: { xs: "100%", sm: 500 },
+                width: { xs: "100%", sm: 500 }
               }}
               label="NIP"
               name="nip"
@@ -117,11 +119,16 @@ const EditCompanyDetails = () => {
               {...register("nip")}
             />
           </Box>
-          <Box>
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "center",
+            }}
+          >
             <TextField
               sx={{
                 mb: 5,
-                mx: 5,
                 width: { xs: "100%", sm: 500 },
               }}
               label="Miasto"
@@ -131,11 +138,16 @@ const EditCompanyDetails = () => {
               {...register("city")}
             />
           </Box>
-          <Box>
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "center",
+            }}
+          >
             <TextField
               sx={{
                 mb: 5,
-                mx: 5,
                 width: { xs: "100%", sm: 500 },
               }}
               label="Ulica"
@@ -145,11 +157,16 @@ const EditCompanyDetails = () => {
               {...register("street")}
             />
           </Box>
-          <Box>
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "center",
+            }}
+          >
             <TextField
               sx={{
                 mb: 5,
-                mx: 5,
                 width: { xs: "100%", sm: 500 },
               }}
               label="Numer domu"
@@ -159,11 +176,16 @@ const EditCompanyDetails = () => {
               {...register("houseNumber")}
             />
           </Box>
-          <Box>
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "center",
+            }}
+          >
             <TextField
               sx={{
                 mb: 5,
-                mx: 5,
                 width: { xs: "100%", sm: 500 },
               }}
               label="Numer lokalu"
@@ -173,11 +195,16 @@ const EditCompanyDetails = () => {
               {...register("apartmentNumber")}
             />
           </Box>
-          <Box>
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "center",
+            }}
+          >
             <TextField
               sx={{
                 mb: 4.3,
-                mx: 5,
                 width: { xs: "100%", sm: 500 },
               }}
               label="Kod pocztowy"
@@ -187,15 +214,22 @@ const EditCompanyDetails = () => {
               {...register("postalCode")}
             />
           </Box>
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "center",
+            }}
+          >
           <Button
             type="submit"
             sx={{
-              width: { xs: "100%", sm: 500 },
-              mx: 5,
+              height: 50,
             }}
           >
             Zapisz
           </Button>
+          </Box>
         </form>
       </Card>
     </Box>

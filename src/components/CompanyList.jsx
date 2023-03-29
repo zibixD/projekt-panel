@@ -7,6 +7,7 @@ import { useIsMobile } from "../hooks/useIsMobile";
 import { useLogout } from "../hooks/useLogout";
 import { getCompaniesList } from "../store/panel-actions";
 // import DebugButton from "./DebugButton";
+import { ExitToApp } from "@mui/icons-material";
 
 const columns = [
   { field: "name", headerName: "Nazwa firmy", width: 150 },
@@ -43,6 +44,7 @@ const CompanyList = () => {
         sx={{
           backgroundColor: "primary.light",
           display: "flex",
+          // flexDirection: { xs: "column", sm: "row" },
         }}
       >
         <Typography
@@ -61,11 +63,14 @@ const CompanyList = () => {
           onClick={logout}
           sx={{
             color: "white",
-            width: 250,
-            paddingRight: 2,
+            width: { xs: "100%", sm: "20%" },
+            // paddingRight: { sm: 13.5 },
+            paddingRight:  13.5 ,
             fontSize: 20,
+            // width: "10%"
           }}
         >
+          <ExitToApp sx={{ mr: 1 }} />
           Wyloguj
         </Button>
         {/* <DebugButton /> */}

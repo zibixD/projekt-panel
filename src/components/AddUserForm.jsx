@@ -19,7 +19,6 @@ import { useNavigate, useParams } from "react-router-dom";
 import { companyService } from "../services/companyService";
 import { dispatch } from "../store/storeMain";
 import { showErrorSnack, showSuccessSnack } from "../store/ui-actions";
-import { useIsAuthenticated } from "../hooks/useIsAuthenticated";
 import { useIsMobile } from "../hooks/useIsMobile";
 
 const schema = yup.object({
@@ -41,7 +40,6 @@ const AddUsersForm = () => {
   const isMobile = useIsMobile();
   const params = useParams();
   const navigate = useNavigate();
-  const isAuth = useIsAuthenticated();
   const {
     register,
     handleSubmit,
@@ -59,12 +57,6 @@ const AddUsersForm = () => {
       confirmPassword: "",
     },
   });
-
-  useEffect(() => {
-    if (!isAuth) {
-      navigate("/");
-    }
-  }, [isAuth]);
 
   const submitHandler = async (data) => {
     const newData = {

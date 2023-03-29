@@ -3,12 +3,15 @@ import { Box, TextField, Button, Typography } from "@mui/material";
 import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { showErrorSnack } from "../store/ui-actions";
+import { useIsMobile } from "../hooks/useIsMobile";
 
 const LoginForm = () => {
   const [filledE, setFilledE] = useState();
   const [filledP, setFilledP] = useState();
   const dispatch = useDispatch();
   const formErrors = useActionData();
+  const navigation = useNavigation();
+  const isMobile = useIsMobile();
 
   useEffect(() => {
     if (formErrors?.error) {
@@ -16,7 +19,6 @@ const LoginForm = () => {
     }
   }, [formErrors]);
 
-  const navigation = useNavigation();
 
   const isSubmitting = navigation.state === "submitting";
 
@@ -41,27 +43,32 @@ const LoginForm = () => {
       </Box>
       <Box
         sx={{
-          display: "flex",
-          flexWrap: "wrap",
-          flexDirection: "column",
-          alignItems: "center",
-          boxShadow: 4,
-          width: {
-            xs: "100%",
-            sm: "600",
-            md: 700,
-          },
-          height: { xs: "100%", sm: 400 },
+          width: { xs: "100%", sm: 600 },
         }}
       >
-        <Form action="/" method="post">
-          <Box>
+        <Box
+          sx={{ 
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+          paddingY: 8,
+          boxShadow: 5,
+          width: { xs: "100%", sm: 600 },
+          }}
+        >
+       <Form action="/" method="post" style={{ width: isMobile ? "80%" : "100%" }}>
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "center",
+              // width: isMobile ? "80%" : "100%"
+            }}
+          >
             <TextField
               sx={{
-                mb: 5,
-                mt: 10,
-                mx: 5,
-                width: { sx: "100%", sm: 500 },
+                marginY: 5,
+                width: { xs: "100%", sm: 500 },
               }}
               name="email"
               id="email"
@@ -71,12 +78,17 @@ const LoginForm = () => {
               onChange={(event) => setFilledE(event.target.value)}
             />
           </Box>
-          <Box>
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "center",
+            }}
+          >
             <TextField
               sx={{
                 mb: 5,
-                mx: 5,
-                width: { sx: "100%", sm: 500 },
+                width: { xs: "100%", sm: 500 },
               }}
               name="password"
               id="password"
@@ -86,18 +98,24 @@ const LoginForm = () => {
               onChange={(event) => setFilledP(event.target.value)}
             />
           </Box>
-          <Button
+          <Box
             sx={{
-              height: 50,
-              width: { sx: "100%", sm: 500 },
-              mx: 5,
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "center",
             }}
-            type="submit"
-            disabled={!filledE || !filledP || isSubmitting}
           >
-            {isSubmitting ? "zatwierdzanie" : "zaloguj"}
-          </Button>
-        </Form>
+            <Button
+              sx={{
+                height: 50,
+              }}
+              type="submit"
+              disabled={!filledE || !filledP || isSubmitting}
+            >
+              {isSubmitting ? "zatwierdzanie" : "zaloguj"}
+            </Button>
+          </Box>
+        </Form></Box>
       </Box>
     </Box>
   );
