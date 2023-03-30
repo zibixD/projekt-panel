@@ -10,6 +10,7 @@ import ConfirmSlide from "../UI/Alerts/ConfirmAlert";
 import { useEffect, useState } from "react";
 import CardBaner from "../UI/CardBaner";
 import { useIsMobile } from "../hooks/useIsMobile";
+import { useNavigate } from "react-router-dom";
 
 const schema = yup.object({
   name: yup.string().required(),
@@ -36,6 +37,7 @@ const EditCompanyDetails = () => {
   const dispatch = useDispatch();
   const [canShowModal, setCanShowModal] = useState(false);
   const isMobile = useIsMobile()
+  const navigate = useNavigate()
 
   const onSubmit = async (data) => {
     await companyService

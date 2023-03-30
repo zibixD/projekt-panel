@@ -155,7 +155,7 @@ const AddUsersForm = () => {
                   mb: 5,
                 }}
               >
-                Typ użytkownika
+              Typ użytkownika
               </InputLabel>
               <Select
                 sx={{
@@ -163,13 +163,14 @@ const AddUsersForm = () => {
                   width: { xs: "100%", sm: 500 },
                 }}
                 labelId="userType"
+                label="Typ użytkownika"
                 defaultValue="n"
                 error={!!errors.type}
                 {...register("type")}
-              >
-                <MenuItem value="n">n</MenuItem>
-                <MenuItem value="s">s</MenuItem>
-                <MenuItem value="p">p</MenuItem>
+                >
+                  <MenuItem value="n">n</MenuItem>
+                  <MenuItem value="s">s</MenuItem>
+                  <MenuItem value="p">p</MenuItem>
               </Select>
             </FormControl>
           </Box>
@@ -196,6 +197,7 @@ const AddUsersForm = () => {
                   width: { xs: "100%", sm: 500 },
                 }}
                 labelId="userRole"
+                label="Rola użytkownika"
                 error={!!errors.role}
                 {...register("role")}
               >

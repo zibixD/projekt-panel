@@ -11,6 +11,8 @@ import { fetchCompanyUsers, fetchCompanyData } from "../store/panel-actions";
 import HomeIcon from "../UI/HomeIcon";
 import CardBaner from "../UI/CardBaner";
 import ConfirmSlide from "../UI/Alerts/ConfirmAlert";
+import { useIsMobile } from "../hooks/useIsMobile";
+import LoadingEffect from "../UI/LoadingCircle";
 
 const columns = [
   { field: "id", headerName: "Identyfikator", width: 150 },
@@ -32,6 +34,7 @@ const CompanyDetail = () => {
   const [canShowModal, setCanShowModal] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const isMobile = useIsMobile()
 
   useEffect(() => {
     dispatch(fetchCompanyData(params.id));
@@ -70,7 +73,7 @@ const CompanyDetail = () => {
             alignItems: "center",
           }}
         >
-          <CircularProgress />
+          <LoadingEffect />
         </Box>
       ) : (
         <>
@@ -87,7 +90,7 @@ const CompanyDetail = () => {
                 <Tab label="Szczegóły firmy" />
                 <Tab label="Pracownicy" />
               </Tabs>
-              <TabContext value={value}>
+              <TabContext value={value} >
                 <Card
                   sx={{
                     padding: 5,

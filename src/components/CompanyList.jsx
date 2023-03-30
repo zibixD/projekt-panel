@@ -8,6 +8,7 @@ import { useLogout } from "../hooks/useLogout";
 import { getCompaniesList } from "../store/panel-actions";
 // import DebugButton from "./DebugButton";
 import { ExitToApp } from "@mui/icons-material";
+import LoadingEffect from "../UI/LoadingCircle";
 
 const columns = [
   { field: "name", headerName: "Nazwa firmy", width: 150 },
@@ -17,6 +18,7 @@ const columns = [
 const CompanyList = () => {
   const companies = useSelector((state) => state.company.companies);
   const error = useSelector((state) => state.ui.error);
+  const isLoadingCompanies = useSelector((state) => state.company.isLoadingCompanies);
   const navigate = useNavigate();
   const logout = useLogout();
   const isMobile = useIsMobile();
@@ -82,7 +84,40 @@ const CompanyList = () => {
           boxShadow: 5,
         }}
       >
-        <DataGrid
+
+        {isLoadingCompanies ? 
+        
+        (
+          <Box 
+            sx={{
+              width: "100vw",
+              height: "60vh",
+              display: "flex",
+                flexDirection: "column",
+                justifyContent: "center",
+                alignItems: "center",
+            }}
+          >
+            <LoadingEffect/>
+          </Box>
+          )
+          : (
+           <DataGrid
+           sx={{
+             padding: 1,
+           }}
+           onRowClick={
+             isMobile ? ({ row }) => doubleClickHandler(row.id) : undefined
+           }
+           onRowDoubleClick={({ id }) => doubleClickHandler(id)}
+           getRowId={(row) => row.id}
+           rows={companies}
+           columns={columns}
+         />
+        ) 
+
+        }
+        {/* <DataGrid
           sx={{
             padding: 1,
           }}
@@ -93,7 +128,7 @@ const CompanyList = () => {
           getRowId={(row) => row.id}
           rows={companies}
           columns={columns}
-        />
+        /> */}
       </Box>
     </>
   );
