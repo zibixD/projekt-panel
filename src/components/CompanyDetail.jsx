@@ -90,28 +90,13 @@ const CompanyDetail = () => {
                 <Tab label="Szczegóły firmy" />
                 <Tab label="Pracownicy" />
               </Tabs>
-
-              {isLoadingDetails ? (
-        <Box
-          sx={{
-            display: "flex",
-            placeContent: "center",
-            alignItems: "center",
-          }}
-        >
-          <LoadingEffect />
-        </Box>
-              ) : (
               <TabContext value={value} >
-                
                 <Card
                   sx={{
                     padding: 5,
                     boxShadow: 5,
                   }}
                 >
-
-
                   <TabPanel value={0}>
                     <Typography variant="h5">
                       Nazwa firmy: {details?.name ? details.name : "Brak"}
@@ -157,7 +142,7 @@ const CompanyDetail = () => {
                     </Box>
                   </TabPanel>
                 </Card>
-              </TabContext>)}
+              </TabContext>
             </>
           )}
         </>
