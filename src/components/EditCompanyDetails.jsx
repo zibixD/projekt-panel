@@ -28,7 +28,7 @@ const schema = yup.object({
 const EditCompanyDetails = () => {
   const {
     register,
-    formState: { errors, isDirty },
+    formState: { errors, isDirty, isSubmitting },
     handleSubmit,
   } = useForm({
     resolver: yupResolver(schema),
@@ -225,11 +225,12 @@ const EditCompanyDetails = () => {
           >
           <Button
             type="submit"
+            disabled={isSubmitting}
             sx={{
               height: 50,
             }}
           >
-            Zapisz
+            {isSubmitting ? "Zapisywanie zmian" : "Zapisz"}
           </Button>
           </Box>
         </form>

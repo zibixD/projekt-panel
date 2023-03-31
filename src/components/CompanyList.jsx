@@ -114,21 +114,8 @@ const CompanyList = () => {
            rows={companies}
            columns={columns}
          />
-        ) 
+        )}
 
-        }
-        {/* <DataGrid
-          sx={{
-            padding: 1,
-          }}
-          onRowClick={
-            isMobile ? ({ row }) => doubleClickHandler(row.id) : undefined
-          }
-          onRowDoubleClick={({ id }) => doubleClickHandler(id)}
-          getRowId={(row) => row.id}
-          rows={companies}
-          columns={columns}
-        /> */}
       </Box>
     </>
   );
